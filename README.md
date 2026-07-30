@@ -24,7 +24,7 @@
 ```bash
 cd /Users/zy/ai_learn/learn_en
 npm install        # 只第一次需要
-npm run dev        # 启动，浏览器自动打开 http://127.0.0.1:5900/
+npm run dev        # 启动，浏览器自动打开 http://127.0.0.1:5850/
 ```
 
 > 启动后**保持终端开着**就行。我用 Claude 往数据文件里加新课时，网页会**自动刷新**，你不用做任何事。

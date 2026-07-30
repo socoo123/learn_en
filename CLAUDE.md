@@ -67,7 +67,7 @@
 ## 五、技术备忘（给 Claude 自己）
 
 - 纯前端，无后端。所有数据在 `src/data/lessons.js`。
-- 启动：`npm run dev`（http://127.0.0.1:5173 ，浏览器自动开）。构建：`npm run build`。
+- 启动：`npm run dev`（http://127.0.0.1:5900 ，端口固定，浏览器自动开）。构建：`npm run build`。
 - 状态持久化两个 key：
   - `en_reader_v2`：UI 偏好（当前课程、主题、中文展开、当前视图 `home`/`lesson`）
   - `en_reader_progress`：学习进度 `{ version:1, updatedAt, lessons: { [id]: { done, updatedAt } } }`，可导出/导入 `en-progress.json`

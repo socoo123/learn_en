@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F']
@@ -13,28 +13,51 @@ function fillCorrect(value, q) {
 }
 const answerText = q => (Array.isArray(q.answer) ? q.answer[0] : q.answer)
 
-function FillQuestion({ q, revealed, answered, ans, onAnswer }) {
+/** Choice answers may be option index (0-based) or the option string itself. */
+function choiceAnswerIndex(q) {
+  if (typeof q.answer === 'number' && Number.isFinite(q.answer)) return q.answer
+  if (Array.isArray(q.answer) && typeof q.answer[0] === 'number') return q.answer[0]
+  const text = Array.isArray(q.answer) ? q.answer[0] : q.answer
+  const idx = (q.options || []).findIndex((opt) => opt === text || norm(opt) === norm(text))
+  return idx
+}
+
+function FillQuestion({ q, revealed, answered, onAnswer }) {
   const [val, setVal] = useState('')
   const parts = q.q.split(/_{2,}/)
-  const showAns = revealed || answered
-  const displayVal = answered ? (ans?.chosen ?? val) : (revealed ? answerText(q) : val)
+
+  // 重置练习时清空输入；一键显示答案时不锁死编辑态以外的本地值
+  useEffect(() => {
+    if (!answered && !revealed) setVal('')
+  }, [answered, revealed])
+
+  const submit = () => {
+    if (revealed) return
+    onAnswer(val)
+  }
+
   return (
     <>
       <div className="qtext">
         {parts[0]}
         <input
-          className="fill-input" placeholder="?"
-          disabled={showAns}
-          value={displayVal}
-          onChange={e => { if (!showAns) setVal(e.target.value) }}
-          onKeyDown={e => { if (e.key === 'Enter' && !showAns) onAnswer(val) }}
+          className="fill-input"
+          placeholder="?"
+          disabled={revealed}
+          value={revealed && !answered ? answerText(q) : val}
+          onChange={e => { if (!revealed) setVal(e.target.value) }}
+          onKeyDown={e => { if (e.key === 'Enter') submit() }}
         />
         {parts.slice(1).join(' ')}
       </div>
-      {!showAns && (
+      {!revealed && (
         <div className="actions">
-          <button className="btn" onClick={() => onAnswer(val)}>提交答案</button>
-          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>回车也可提交</span>
+          <button className="btn" onClick={submit}>
+            {answered ? '重新提交' : '提交答案'}
+          </button>
+          <span style={{ fontSize: 12, color: 'var(--text-faint)' }}>
+            回车也可提交 · 提交后仍可修改
+          </span>
         </div>
       )}
     </>
@@ -49,8 +72,16 @@ export default function Quiz({ quiz }) {
 
   const revealed = showAnswers
   const answer = (i, q, chosen) => {
-    if (answers[i] || revealed) return
-    const correct = q.type === 'fill' ? fillCorrect(chosen, q) : chosen === q.answer
+    if (revealed) return
+    // 选择题提交后锁定；填空题允许改完再交
+    if (q.type !== 'fill' && answers[i]) return
+    let correct
+    if (q.type === 'fill') {
+      correct = fillCorrect(chosen, q)
+    } else {
+      const right = choiceAnswerIndex(q)
+      correct = right >= 0 && chosen === right
+    }
     setAnswers(a => ({ ...a, [i]: { chosen, correct } }))
   }
 
@@ -88,17 +119,18 @@ export default function Quiz({ quiz }) {
               <span className="qtag">{q.tag || (q.type === 'fill' ? '填空' : '选择')}</span>
 
               {q.type === 'fill' ? (
-                <FillQuestion q={q} revealed={revealed} answered={answered} ans={ans} onAnswer={v => answer(i, q, v)} />
+                <FillQuestion q={q} revealed={revealed} answered={answered} onAnswer={v => answer(i, q, v)} />
               ) : (
                 <>
                   <div className="qtext">{q.q}</div>
                   <div className="opts">
                     {q.options.map((opt, oi) => {
+                      const right = choiceAnswerIndex(q)
                       let cls = 'opt'
                       if (answered) {
-                        if (oi === q.answer) cls += ' correct'
+                        if (oi === right) cls += ' correct'
                         else if (oi === ans.chosen) cls += ' wrong'
-                      } else if (revealed && oi === q.answer) cls += ' correct'
+                      } else if (revealed && oi === right) cls += ' correct'
                       return (
                         <button key={oi} className={cls} disabled={answered || revealed} onClick={() => answer(i, q, oi)}>
                           <span className="key">{KEYS[oi]}</span>
@@ -119,7 +151,18 @@ export default function Quiz({ quiz }) {
                   >
                     {answered && <div>{ans.correct ? '✓ 正确' : '✗ 再想想'}</div>}
                     {(!answered || !ans.correct) && (
-                      <div>参考答案：<span className="ans">{q.type === 'fill' ? answerText(q) : `${KEYS[q.answer]}. ${q.options[q.answer]}`}</span></div>
+                      <div>
+                        参考答案：
+                        <span className="ans">
+                          {q.type === 'fill'
+                            ? answerText(q)
+                            : (() => {
+                                const right = choiceAnswerIndex(q)
+                                if (right < 0) return String(answerText(q))
+                                return `${KEYS[right]}. ${q.options[right]}`
+                              })()}
+                        </span>
+                      </div>
                     )}
                     {q.explain && <div className="explain">💡 {q.explain}</div>}
                   </motion.div>

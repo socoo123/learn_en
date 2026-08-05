@@ -2,6 +2,7 @@ import Passage from './Passage.jsx'
 import VocabTable from './VocabTable.jsx'
 import Grammar from './Grammar.jsx'
 import Quiz from './Quiz.jsx'
+import DifficultySurvey from './DifficultySurvey.jsx'
 import { useProgress } from '../hooks/useProgress.jsx'
 
 export default function LessonView({
@@ -66,12 +67,21 @@ export default function LessonView({
             <span className="ldate">{lesson.date}</span>　{lesson.title}
           </h1>
           <div className="meta">
+            {lesson.timeRange && (
+              <span className="time-range">视频 {lesson.timeRange}</span>
+            )}
+            {lesson.timeRange && lesson.source && <span className="dot">·</span>}
             {lesson.source && <span>来源：{lesson.source}</span>}
             {lesson.source && lesson.tags && lesson.tags.length > 0 && <span className="dot">·</span>}
             {lesson.tags && lesson.tags.map((t, i) => (
               <span className="tag" key={i}>{t}</span>
             ))}
           </div>
+          {lesson.timeRange && (
+            <p className="time-range-hint">
+              打开演讲视频，把进度条拖到 <strong>{lesson.timeRange.split('–')[0]}</strong>，只练这一段。
+            </p>
+          )}
         </div>
 
         <Passage
@@ -95,6 +105,8 @@ export default function LessonView({
         <Grammar grammar={lesson.grammar} sentences={lesson.sentences} />
 
         <Quiz quiz={lesson.quiz} />
+
+        {lesson.kind === 'reading' && <DifficultySurvey lessonId={lesson.id} />}
       </div>
     </main>
   )

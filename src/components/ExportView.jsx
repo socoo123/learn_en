@@ -54,6 +54,10 @@ function ExportAnnotations({ core }) {
             {w.phon && <span className="ex-phon">{w.phon}</span>}
           </div>
           <div className="ex-cw-def">{w.def}</div>
+          {w.def_en && <div className="ex-cw-def-en">{w.def_en}</div>}
+          {w.syn?.length > 0 && (
+            <div className="ex-cw-syn">≈ {w.syn.join(' · ')}</div>
+          )}
           {w.ex_en && (
             <div className="ex-cw-ex">
               {w.ex_en}
@@ -118,6 +122,10 @@ export default function ExportView({ lesson }) {
                       </div>
                       <div className="ex-vd">
                         {v.def}
+                        {v.def_en && <div className="ex-vdef-en">{v.def_en}</div>}
+                        {v.syn?.length > 0 && (
+                          <div className="ex-vsyn">≈ {v.syn.join(' · ')}</div>
+                        )}
                         {v.ex_en && (
                           <div className="ex-vex">
                             {v.ex_en}

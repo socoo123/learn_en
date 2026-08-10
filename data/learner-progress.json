@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-08-10T00:19:03.873Z",
+  "updatedAt": "2026-08-10T23:18:45.876Z",
   "lessons": {
     "2026-07-30": {
       "done": true,
@@ -51,6 +51,10 @@
       "updatedAt": "2026-08-10T00:19:03.873Z",
       "note": "这篇也很实用。",
       "done": true
+    },
+    "2026-08-06-cook-04": {
+      "done": true,
+      "updatedAt": "2026-08-10T23:18:45.876Z"
     }
   },
   "feedback": {

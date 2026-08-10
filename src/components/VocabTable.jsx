@@ -47,6 +47,13 @@ export default function VocabTable({ vocab }) {
               </div>
               <div className="v-def">
                 {v.def}
+                {v.def_en && <div className="v-def-en">{v.def_en}</div>}
+                {v.syn?.length > 0 && (
+                  <div className="v-syn">
+                    <span className="v-syn-label">≈</span>
+                    {v.syn.join(' · ')}
+                  </div>
+                )}
                 {v.ex_en && (
                   <span className="v-toggle" onClick={() => toggle(i)}>
                     {expanded ? '收起例句' : '例句'}

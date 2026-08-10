@@ -3,7 +3,7 @@
 > **给下次会话的 Agent / 自己**：先读 `CLAUDE.md`，再读本文「现状清单 + 日常任务」。  
 > 本文是当前真实方案与待续工作的单一事实来源（SoT），不是过期草稿。
 
-**最后更新**：2026-08-09
+**最后更新**：2026-08-11
 
 ---
 
@@ -39,7 +39,7 @@
 |------|------|
 | shadow 系列 | **库克斯坦福演讲** `cook-stanford-2019`：17 份，视频约 00:04–17:38，预计 30 天学完 |
 | 数据文件 | `src/data/shadow/cook-stanford-2019.js` + `series.js` 中 analysis |
-| reading | 示例 1 篇：`2026-08-06 how to learn Claude Code` |
+| reading | 近几日每日阅读（含 08-11 bug report）；生词均带 `def_en` + `syn` |
 
 每份精听课带 **`timeRange`**（首页与课文页均展示「视频 mm:ss–mm:ss」）。
 
@@ -73,13 +73,14 @@ src/data/
 
 1. **加权选题**：~60% IT/软件开发（教程 · 工程文 · 论文/RFC 导读）+ ~30% 职场场景（活动邮件 · 调查表 · 日常商务交流）+ ~10% 其余。
 2. 写 `kind:"reading"`，约 **400 词**（±50），`stats` + vocab（宜偏多）+ quiz。
-3. **难度锚**：对齐 `2026-08-08-reading`；用户未说加难前不擅自抬抽象度/俚语密度。
-4. 看近期反馈微调；必要时清理 3 个月前的 reading。
+3. **生词字段**：每条 `core.words` / `vocab` 除中文 `def` 外，必填 **`def_en`（英译英，简单英语）** + **`syn`（1～3 个近义/相关表达，数组）**，方便在英文环境理解。
+4. **难度锚**：对齐 `2026-08-08-reading`；用户未说加难前不擅自抬抽象度/俚语密度。
+5. 看近期反馈微调；必要时清理 3 个月前的 reading。
 
 ### 2.2 「拆这段精听 / 给了 .srt」
 
 1. 解析字幕，按 ~1 分钟切分；修正 ASR。
-2. 每份填 `timeRange`、中英 `passage`、core/vocab/quiz。
+2. 每份填 `timeRange`、中英 `passage`、core/vocab/quiz；生词同样带 `def_en` + `syn`。
 3. 更新 `series.js`（含 analysis）+ `shadow/<id>.js`，并在 `lessons.js` import。
 4. 告知用户：系列名、份数、时间范围、预计学完周期。
 
@@ -91,7 +92,7 @@ src/data/
 
 ### 2.4 用户贴生词
 
-补进对应课 vocab（默认最近一课）；不要新建一课。
+补进对应课 vocab（默认最近一课）；不要新建一课。同样写 `def` + `def_en` + `syn`。
 
 ### 2.5 「我现在什么水平 / 多久到 B2」
 
@@ -116,6 +117,15 @@ kind: "reading"
 stats: { words, newWords, minutes }
 passage, core, vocab, grammar, quiz
 # 文末 DifficultySurvey：difficulty + note
+```
+
+### 生词条（core.words / vocab）
+
+```
+{ w, phon, pos, def, def_en, syn: ["…", "…"], ex_en, ex_zh }
+# def     中文释义
+# def_en  英译英（短句/短语，B1 可读）
+# syn     近义词或近似说法（1～3 个；短语动词可给同义短语）
 ```
 
 ### series.analysis
@@ -173,6 +183,7 @@ assessment?: 可选覆盖 assessment.js
 
 - [ ] 更多精听系列（用户再给字幕时按 §2.2 追加）
 - [x] 阅读选题按偏好**加权**（IT/职场为主；见 2.1；难度锚 08-08）
+- [x] 生词英译英 + 近义词（`def_en` / `syn`；UI 已展示；新旧课均按此写）
 - [ ] 精听课也可选加「跟读检查」类练习（若用户要求）
 - [ ] README 用户向导与本 PLAN 同步（见 README）
 - [ ] 可选：挂音频/视频链接到 timeRange（用户若需要再做）

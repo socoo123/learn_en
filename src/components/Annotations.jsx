@@ -27,6 +27,13 @@ export default function Annotations({ lesson, cardFlash, onWordClick }) {
             {w.phon && <span className="cw-phon">{w.phon}</span>}
           </div>
           <div className="cw-def">{w.def}</div>
+          {w.def_en && <div className="cw-def-en">{w.def_en}</div>}
+          {w.syn?.length > 0 && (
+            <div className="cw-syn">
+              <span className="cw-syn-label">≈</span>
+              {w.syn.join(' · ')}
+            </div>
+          )}
           {w.ex_en && <div className="cw-ex">{w.ex_en}<br />{w.ex_zh}</div>}
         </div>
       )) : <div style={{ fontSize: 12.5, color: 'var(--text-faint)' }}>无</div>}

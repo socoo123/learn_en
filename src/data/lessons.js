@@ -12,6 +12,7 @@
  *   durationMin  预计分钟
  *   stats      reading: { words, newWords, minutes }
  *   passage / core / vocab / grammar / sentences / quiz  — 同现有形态
+ *   生词条：def（中文）+ def_en（英译英）+ syn（近义数组）
  * ------------------------------------------------------------------ */
 import { COOK_STANFORD_LESSONS } from './shadow/cook-stanford-2019.js'
 
@@ -53,12 +54,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "ship", phon: "/ʃɪp/", pos: "v.", def: "交付 / 上线（产品或改动）", ex_en: "Ship clearer diffs with fewer surprises.", ex_zh: "用更少意外交付更清晰的 diff。" },
-        { w: "brief", phon: "/briːf/", pos: "n.", def: "简短任务说明 / 需求摘要", ex_en: "Write a short brief in plain English.", ex_zh: "用白话写一段简短 brief。" },
-        { w: "working tree", phon: "/ˈwɜːkɪŋ triː/", pos: "n.", def: "（Git）工作区当前文件状态", ex_en: "Keep the working tree honest.", ex_zh: "让工作区保持诚实。" },
-        { w: "course correction", phon: "/kɔːs kəˈrekʃn/", pos: "n.", def: "中途纠偏 / 调整方向", ex_en: "Course correction is cheaper early.", ex_zh: "越早纠偏越便宜。" },
-        { w: "compounds", phon: "/kəmˈpaʊndz/", pos: "v.", def: "产生复利 / 累积放大", ex_en: "That is how the tool compounds.", ex_zh: "工具的复利来自这里。" },
-        { w: "sharp intent", phon: "/ʃɑːp ɪnˈtent/", pos: "n.", def: "清晰明确的意图", ex_en: "People who give sharp intent and then verify.", ex_zh: "意图清晰、然后再验收的人。" }
+        { w: "ship", phon: "/ʃɪp/", pos: "v.", def: "交付 / 上线（产品或改动）", def_en: "to deliver or release a product change", syn: ["release", "launch", "roll out"], ex_en: "Ship clearer diffs with fewer surprises.", ex_zh: "用更少意外交付更清晰的 diff。" },
+        { w: "brief", phon: "/briːf/", pos: "n.", def: "简短任务说明 / 需求摘要", def_en: "a short note that explains the task", syn: ["summary", "task note", "spec blurb"], ex_en: "Write a short brief in plain English.", ex_zh: "用白话写一段简短 brief。" },
+        { w: "working tree", phon: "/ˈwɜːkɪŋ triː/", pos: "n.", def: "（Git）工作区当前文件状态", def_en: "the current files in your Git workspace", syn: ["workspace files", "local changes"], ex_en: "Keep the working tree honest.", ex_zh: "让工作区保持诚实。" },
+        { w: "course correction", phon: "/kɔːs kəˈrekʃn/", pos: "n.", def: "中途纠偏 / 调整方向", def_en: "a mid-way change of direction", syn: ["adjustment", "pivot", "redirect"], ex_en: "Course correction is cheaper early.", ex_zh: "越早纠偏越便宜。" },
+        { w: "compounds", phon: "/kəmˈpaʊndz/", pos: "v.", def: "产生复利 / 累积放大", def_en: "grows bigger over time by stacking gains", syn: ["builds up", "accumulates", "multiplies"], ex_en: "That is how the tool compounds.", ex_zh: "工具的复利来自这里。" },
+        { w: "sharp intent", phon: "/ʃɑːp ɪnˈtent/", pos: "n.", def: "清晰明确的意图", def_en: "a clear and specific goal", syn: ["clear goal", "precise aim"], ex_en: "People who give sharp intent and then verify.", ex_zh: "意图清晰、然后再验收的人。" }
       ],
       grammar: [
         { t: "treat A like B", d: "把 A 当成 B 来对待：treat it like a new coworker。" },
@@ -67,24 +68,24 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "coworker", phon: "/ˈkəʊwɜːkə/", pos: "n.", def: "同事", ex_en: "Treat it like a new coworker.", ex_zh: "把它当成新同事。" },
-      { w: "clarification", phon: "/ˌklærəfɪˈkeɪʃn/", pos: "n.", def: "澄清 / 说明", ex_en: "It asks for clarification.", ex_zh: "它会追问澄清。" },
-      { w: "diff", phon: "/dɪf/", pos: "n.", def: "代码差异（diff）", ex_en: "Skim the diff like a code review.", ex_zh: "像 code review 一样扫 diff。" },
-      { w: "typo", phon: "/ˈtaɪpəʊ/", pos: "n.", def: "打字错误", ex_en: "Fix a typo first.", ex_zh: "先改一个错别字。" },
-      { w: "symbol", phon: "/ˈsɪmbl/", pos: "n.", def: "（代码里的）符号 / 标识符", ex_en: "Rename a symbol carefully.", ex_zh: "小心重命名一个符号。" },
-      { w: "vague", phon: "/veɪɡ/", pos: "adj.", def: "模糊的 / 含糊的", ex_en: "Vague prompts create vague patches.", ex_zh: "模糊的提示会产出模糊的补丁。" },
-      { w: "crisp", phon: "/krɪsp/", pos: "adj.", def: "干净利落的 / 明确的", ex_en: "A crisp brief creates a reviewable PR.", ex_zh: "干净的 brief 换来可审查的 PR。" },
-      { w: "stash", phon: "/stæʃ/", pos: "v.", def: "（Git）暂存改动", ex_en: "Stash unrelated edits first.", ex_zh: "先 stash 无关改动。" },
-      { w: "edge case", phon: "/edʒ keɪs/", pos: "n.", def: "边界情况", ex_en: "Check naming and edge cases.", ex_zh: "检查命名和边界情况。" },
-      { w: "pin", phon: "/pɪn/", pos: "v.", def: "钉住 / 固定（约定或版本）", ex_en: "Pin the repo conventions.", ex_zh: "钉住仓库约定。" },
-      { w: "convention", phon: "/kənˈvenʃn/", pos: "n.", def: "约定 / 惯例", ex_en: "Follow the repo conventions.", ex_zh: "遵守仓库约定。" },
-      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件", ex_en: "Stop re-explaining the same constraints.", ex_zh: "别反复重讲同一套约束。" },
-      { w: "reusable", phon: "/riːˈjuːzəbl/", pos: "adj.", def: "可复用的", ex_en: "Your taste becomes reusable context.", ex_zh: "你的品味变成可复用的上下文。" },
-      { w: "outcome", phon: "/ˈaʊtkʌm/", pos: "n.", def: "结果 / 成果", ex_en: "Measure progress by outcomes.", ex_zh: "用结果衡量进步。" },
-      { w: "green CI", phon: "/ɡriːn ˌsiː ˈaɪ/", pos: "n.", def: "持续集成全部通过（绿灯）", ex_en: "Time to a green CI.", ex_zh: "等到绿灯 CI 的时间。" },
-      { w: "follow-up", phon: "/ˈfɒləʊ ʌp/", pos: "n./adj.", def: "后续（返工/跟进）", ex_en: "Fewer follow-up fixes.", ex_zh: "更少的后续返工。" },
-      { w: "patch", phon: "/pætʃ/", pos: "n.", def: "补丁 / 一小批改动", ex_en: "Accept the first patch.", ex_zh: "接受第一版补丁。" },
-      { w: "loop", phon: "/luːp/", pos: "n.", def: "循环 / 闭环", ex_en: "Learn that loop, and the rest is practice.", ex_zh: "学会这个闭环，剩下的就是练习。" }
+      { w: "coworker", phon: "/ˈkəʊwɜːkə/", pos: "n.", def: "同事", def_en: "someone you work with", syn: ["colleague", "teammate"], ex_en: "Treat it like a new coworker.", ex_zh: "把它当成新同事。" },
+      { w: "clarification", phon: "/ˌklærəfɪˈkeɪʃn/", pos: "n.", def: "澄清 / 说明", def_en: "an explanation that makes something clearer", syn: ["explanation", "clearing-up"], ex_en: "It asks for clarification.", ex_zh: "它会追问澄清。" },
+      { w: "diff", phon: "/dɪf/", pos: "n.", def: "代码差异（diff）", def_en: "the code changes between two versions", syn: ["code change", "patch view"], ex_en: "Skim the diff like a code review.", ex_zh: "像 code review 一样扫 diff。" },
+      { w: "typo", phon: "/ˈtaɪpəʊ/", pos: "n.", def: "打字错误", def_en: "a small typing mistake", syn: ["misprint", "spelling slip"], ex_en: "Fix a typo first.", ex_zh: "先改一个错别字。" },
+      { w: "symbol", phon: "/ˈsɪmbl/", pos: "n.", def: "（代码里的）符号 / 标识符", def_en: "a name used in code, like a function or variable", syn: ["identifier", "name in code"], ex_en: "Rename a symbol carefully.", ex_zh: "小心重命名一个符号。" },
+      { w: "vague", phon: "/veɪɡ/", pos: "adj.", def: "模糊的 / 含糊的", def_en: "not clear or not specific", syn: ["unclear", "fuzzy", "ambiguous"], ex_en: "Vague prompts create vague patches.", ex_zh: "模糊的提示会产出模糊的补丁。" },
+      { w: "crisp", phon: "/krɪsp/", pos: "adj.", def: "干净利落的 / 明确的", def_en: "clear, short, and easy to act on", syn: ["clear", "precise", "neat"], ex_en: "A crisp brief creates a reviewable PR.", ex_zh: "干净的 brief 换来可审查的 PR。" },
+      { w: "stash", phon: "/stæʃ/", pos: "v.", def: "（Git）暂存改动", def_en: "to temporarily save unfinished Git changes", syn: ["set aside", "shelve changes"], ex_en: "Stash unrelated edits first.", ex_zh: "先 stash 无关改动。" },
+      { w: "edge case", phon: "/edʒ keɪs/", pos: "n.", def: "边界情况", def_en: "a rare or extreme situation that can break code", syn: ["corner case", "odd case"], ex_en: "Check naming and edge cases.", ex_zh: "检查命名和边界情况。" },
+      { w: "pin", phon: "/pɪn/", pos: "v.", def: "钉住 / 固定（约定或版本）", def_en: "to fix something so it does not drift", syn: ["lock", "fix", "freeze"], ex_en: "Pin the repo conventions.", ex_zh: "钉住仓库约定。" },
+      { w: "convention", phon: "/kənˈvenʃn/", pos: "n.", def: "约定 / 惯例", def_en: "an agreed way of doing things in a team or repo", syn: ["rule of thumb", "team norm", "standard"], ex_en: "Follow the repo conventions.", ex_zh: "遵守仓库约定。" },
+      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件", def_en: "a limit you must respect", syn: ["limit", "restriction", "boundary"], ex_en: "Stop re-explaining the same constraints.", ex_zh: "别反复重讲同一套约束。" },
+      { w: "reusable", phon: "/riːˈjuːzəbl/", pos: "adj.", def: "可复用的", def_en: "able to be used again in other places", syn: ["repeatable", "shareable"], ex_en: "Your taste becomes reusable context.", ex_zh: "你的品味变成可复用的上下文。" },
+      { w: "outcome", phon: "/ˈaʊtkʌm/", pos: "n.", def: "结果 / 成果", def_en: "the final result you care about", syn: ["result", "end result"], ex_en: "Measure progress by outcomes.", ex_zh: "用结果衡量进步。" },
+      { w: "green CI", phon: "/ɡriːn ˌsiː ˈaɪ/", pos: "n.", def: "持续集成全部通过（绿灯）", def_en: "continuous checks that all pass", syn: ["passing CI", "all tests green"], ex_en: "Time to a green CI.", ex_zh: "等到绿灯 CI 的时间。" },
+      { w: "follow-up", phon: "/ˈfɒləʊ ʌp/", pos: "n./adj.", def: "后续（返工/跟进）", def_en: "later work that continues from this task", syn: ["next step", "later fix"], ex_en: "Fewer follow-up fixes.", ex_zh: "更少的后续返工。" },
+      { w: "patch", phon: "/pætʃ/", pos: "n.", def: "补丁 / 一小批改动", def_en: "a small set of code changes", syn: ["fix", "small change set"], ex_en: "Accept the first patch.", ex_zh: "接受第一版补丁。" },
+      { w: "loop", phon: "/luːp/", pos: "n.", def: "循环 / 闭环", def_en: "a cycle you repeat to improve", syn: ["cycle", "feedback loop"], ex_en: "Learn that loop, and the rest is practice.", ex_zh: "学会这个闭环，剩下的就是练习。" }
     ],
 
     grammar: [
@@ -192,12 +193,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "tame", phon: "/teɪm/", pos: "v.", def: "驯养；文中引申为「建立独特联系」", ex_en: "The fox wants to be tamed.", ex_zh: "狐狸想被驯养。" },
-        { w: "create ties", phon: "/kriːˈeɪt taɪz/", pos: "v. phr.", def: "建立联系 / 纽带", ex_en: "To create ties so that one person becomes unique.", ex_zh: "建立联系，让某人变得独一无二。" },
-        { w: "ritual", phon: "/ˈrɪtʃuəl/", pos: "n.", def: "仪式 / 固定习惯", ex_en: "Rituals matter.", ex_zh: "仪式感很重要。" },
-        { w: "anticipation", phon: "/ænˌtɪsɪˈpeɪʃn/", pos: "n.", def: "期待 / 预期", ex_en: "Anticipation is part of the gift.", ex_zh: "期待本身就是礼物的一部分。" },
-        { w: "responsible for", phon: "/rɪˈspɒnsəbl fɔː/", pos: "adj. phr.", def: "对……负责", ex_en: "You become responsible for what you have tamed.", ex_zh: "你要对你驯养过的一切负责。" },
-        { w: "essential", phon: "/ɪˈsenʃl/", pos: "adj.", def: "本质的 / 至关重要的", ex_en: "What is essential is invisible to the eye.", ex_zh: "本质的东西眼睛看不见。" }
+        { w: "tame", phon: "/teɪm/", pos: "v.", def: "驯养；文中引申为「建立独特联系」", def_en: "to form a special bond (here: make someone unique to you)", syn: ["bond with", "befriend"], ex_en: "The fox wants to be tamed.", ex_zh: "狐狸想被驯养。" },
+        { w: "create ties", phon: "/kriːˈeɪt taɪz/", pos: "v. phr.", def: "建立联系 / 纽带", def_en: "to build a personal connection", syn: ["build bonds", "form links"], ex_en: "To create ties so that one person becomes unique.", ex_zh: "建立联系，让某人变得独一无二。" },
+        { w: "ritual", phon: "/ˈrɪtʃuəl/", pos: "n.", def: "仪式 / 固定习惯", def_en: "a repeated habit that gives meaning", syn: ["routine", "ceremony", "habit"], ex_en: "Rituals matter.", ex_zh: "仪式感很重要。" },
+        { w: "anticipation", phon: "/ænˌtɪsɪˈpeɪʃn/", pos: "n.", def: "期待 / 预期", def_en: "the feeling of looking forward to something", syn: ["expectation", "looking forward"], ex_en: "Anticipation is part of the gift.", ex_zh: "期待本身就是礼物的一部分。" },
+        { w: "responsible for", phon: "/rɪˈspɒnsəbl fɔː/", pos: "adj. phr.", def: "对……负责", def_en: "having a duty to care for something", syn: ["accountable for", "in charge of"], ex_en: "You become responsible for what you have tamed.", ex_zh: "你要对你驯养过的一切负责。" },
+        { w: "essential", phon: "/ɪˈsenʃl/", pos: "adj.", def: "本质的 / 至关重要的", def_en: "the most important or necessary part", syn: ["vital", "core", "crucial"], ex_en: "What is essential is invisible to the eye.", ex_zh: "本质的东西眼睛看不见。" }
       ],
       grammar: [
         { t: "so that + 结果", d: "表示目的/结果：Come at the same hour so that waiting becomes meaningful." },
@@ -206,22 +207,22 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "quietly", phon: "/ˈkwaɪətli/", pos: "adv.", def: "安静地 / 不动声色地", ex_en: "A quiet lesson about friendship.", ex_zh: "一堂关于友谊的安静课。" },
-      { w: "unique", phon: "/juˈniːk/", pos: "adj.", def: "独一无二的", ex_en: "One person becomes unique to another.", ex_zh: "某人对另一个人变得独一无二。" },
-      { w: "patiently", phon: "/ˈpeɪʃntli/", pos: "adv.", def: "耐心地", ex_en: "The fox explains the process patiently.", ex_zh: "狐狸耐心地解释过程。" },
-      { w: "meaningful", phon: "/ˈmiːnɪŋfl/", pos: "adj.", def: "有意义的", ex_en: "Waiting becomes meaningful.", ex_zh: "等待变得有意义。" },
-      { w: "appointment", phon: "/əˈpɔɪntmənt/", pos: "n.", def: "约定 / 约会", ex_en: "An appointment you can feel in advance.", ex_zh: "你能提前感受到的约定。" },
-      { w: "remind A of B", phon: "/rɪˈmaɪnd əv/", pos: "v. phr.", def: "使 A 想起 B", ex_en: "The fields remind the fox of the prince.", ex_zh: "田野让狐狸想起王子。" },
-      { w: "make one's heart race", phon: "/meɪk hɑːt reɪs/", pos: "v. phr.", def: "让人心跳加速（兴奋/紧张）", ex_en: "A footstep will make his heart race.", ex_zh: "脚步声会让他心跳加速。" },
-      { w: "recognition", phon: "/ˌrekəɡˈnɪʃn/", pos: "n.", def: "辨认 / 认出", ex_en: "Love is recognition.", ex_zh: "爱是辨认。" },
-      { w: "fade", phon: "/feɪd/", pos: "v.", def: "变淡 / 消退", ex_en: "The rest of the world fades a little.", ex_zh: "其余世界淡了一点。" },
-      { w: "owe", phon: "/əʊ/", pos: "v.", def: "欠（责任/人情）", ex_en: "You owe care.", ex_zh: "你欠下照料。" },
-      { w: "invisible", phon: "/ɪnˈvɪzəbl/", pos: "adj.", def: "看不见的", ex_en: "Invisible to the eye.", ex_zh: "眼睛看不见的。" },
-      { w: "metric", phon: "/ˈmetrɪk/", pos: "n.", def: "衡量指标", ex_en: "Titles, tools, and metrics are easy to measure.", ex_zh: "头衔、工具、指标都容易衡量。" },
-      { w: "loyalty", phon: "/ˈlɔɪəlti/", pos: "n.", def: "忠诚", ex_en: "Loyalty and patience sit deeper.", ex_zh: "忠诚与耐心更深。" },
-      { w: "on purpose", phon: "/ɒn ˈpɜːpəs/", pos: "adv. phr.", def: "故意地 / 有意地", ex_en: "Build ties on purpose.", ex_zh: "有意地建立联系。" },
-      { w: "replaceable", phon: "/rɪˈpleɪsəbl/", pos: "adj.", def: "可替换的", ex_en: "Do not treat people as replaceable parts.", ex_zh: "别把人当成可替换零件。" },
-      { w: "travels well", phon: "/ˈtrævlz wel/", pos: "v. phr.", def: "（说法/道理）经得起时间、换场景仍适用", ex_en: "The fox's advice still travels well.", ex_zh: "狐狸的劝告依然好用。" }
+      { w: "quietly", phon: "/ˈkwaɪətli/", pos: "adv.", def: "安静地 / 不动声色地", def_en: "in a calm or low-key way", syn: ["softly", "without fuss"], ex_en: "A quiet lesson about friendship.", ex_zh: "一堂关于友谊的安静课。" },
+      { w: "unique", phon: "/juˈniːk/", pos: "adj.", def: "独一无二的", def_en: "one of a kind; not like others", syn: ["one-of-a-kind", "special"], ex_en: "One person becomes unique to another.", ex_zh: "某人对另一个人变得独一无二。" },
+      { w: "patiently", phon: "/ˈpeɪʃntli/", pos: "adv.", def: "耐心地", def_en: "in a calm way without rushing", syn: ["calmly", "without hurry"], ex_en: "The fox explains the process patiently.", ex_zh: "狐狸耐心地解释过程。" },
+      { w: "meaningful", phon: "/ˈmiːnɪŋfl/", pos: "adj.", def: "有意义的", def_en: "full of purpose or value", syn: ["significant", "worthwhile"], ex_en: "Waiting becomes meaningful.", ex_zh: "等待变得有意义。" },
+      { w: "appointment", phon: "/əˈpɔɪntmənt/", pos: "n.", def: "约定 / 约会", def_en: "a planned meeting time", syn: ["meeting", "scheduled time"], ex_en: "An appointment you can feel in advance.", ex_zh: "你能提前感受到的约定。" },
+      { w: "remind A of B", phon: "/rɪˈmaɪnd əv/", pos: "v. phr.", def: "使 A 想起 B", def_en: "to make A think of B", syn: ["bring to mind", "make one think of"], ex_en: "The fields remind the fox of the prince.", ex_zh: "田野让狐狸想起王子。" },
+      { w: "make one's heart race", phon: "/meɪk hɑːt reɪs/", pos: "v. phr.", def: "让人心跳加速（兴奋/紧张）", def_en: "to make someone feel excited or nervous", syn: ["excite", "make nervous"], ex_en: "A footstep will make his heart race.", ex_zh: "脚步声会让他心跳加速。" },
+      { w: "recognition", phon: "/ˌrekəɡˈnɪʃn/", pos: "n.", def: "辨认 / 认出", def_en: "seeing and knowing someone or something", syn: ["knowing", "identifying"], ex_en: "Love is recognition.", ex_zh: "爱是辨认。" },
+      { w: "fade", phon: "/feɪd/", pos: "v.", def: "变淡 / 消退", def_en: "to become weaker or less clear", syn: ["dim", "grow faint", "recede"], ex_en: "The rest of the world fades a little.", ex_zh: "其余世界淡了一点。" },
+      { w: "owe", phon: "/əʊ/", pos: "v.", def: "欠（责任/人情）", def_en: "to have a duty to give care or thanks", syn: ["be in debt for", "must give"], ex_en: "You owe care.", ex_zh: "你欠下照料。" },
+      { w: "invisible", phon: "/ɪnˈvɪzəbl/", pos: "adj.", def: "看不见的", def_en: "not able to be seen", syn: ["unseen", "hidden"], ex_en: "Invisible to the eye.", ex_zh: "眼睛看不见的。" },
+      { w: "metric", phon: "/ˈmetrɪk/", pos: "n.", def: "衡量指标", def_en: "a number used to measure progress", syn: ["measure", "KPI", "indicator"], ex_en: "Titles, tools, and metrics are easy to measure.", ex_zh: "头衔、工具、指标都容易衡量。" },
+      { w: "loyalty", phon: "/ˈlɔɪəlti/", pos: "n.", def: "忠诚", def_en: "steady support and faithfulness", syn: ["devotion", "allegiance"], ex_en: "Loyalty and patience sit deeper.", ex_zh: "忠诚与耐心更深。" },
+      { w: "on purpose", phon: "/ɒn ˈpɜːpəs/", pos: "adv. phr.", def: "故意地 / 有意地", def_en: "done intentionally, not by accident", syn: ["intentionally", "deliberately"], ex_en: "Build ties on purpose.", ex_zh: "有意地建立联系。" },
+      { w: "replaceable", phon: "/rɪˈpleɪsəbl/", pos: "adj.", def: "可替换的", def_en: "easy to swap with something else", syn: ["interchangeable", "disposable"], ex_en: "Do not treat people as replaceable parts.", ex_zh: "别把人当成可替换零件。" },
+      { w: "travels well", phon: "/ˈtrævlz wel/", pos: "v. phr.", def: "（说法/道理）经得起时间、换场景仍适用", def_en: "still useful in other times or places", syn: ["holds up", "stays relevant"], ex_en: "The fox's advice still travels well.", ex_zh: "狐狸的劝告依然好用。" }
     ],
 
     grammar: [
@@ -328,12 +329,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "culture eats strategy", phon: "/ˈkʌltʃə iːts ˈstrætədʒi/", pos: "idiom", def: "文化胜过战略（再好的计划也架不住糟糕协作氛围）", ex_en: "Culture eats strategy.", ex_zh: "文化胜过战略。" },
-        { w: "know-it-all", phon: "/ˈnəʊ ɪt ɔːl/", pos: "n./adj.", def: "自以为无所不知的人 / 心态", ex_en: "A know-it-all protects old answers.", ex_zh: "无所不知的人护着旧答案。" },
-        { w: "learn-it-all", phon: "/ˈlɜːn ɪt ɔːl/", pos: "n./adj.", def: "乐于持续学习的人 / 心态", ex_en: "Shift from know-it-all to learn-it-all.", ex_zh: "从无所不知转向乐于学习。" },
-        { w: "empathy", phon: "/ˈempəθi/", pos: "n.", def: "共情（站在对方处境理解）", ex_en: "Empathy here is practical.", ex_zh: "这里的共情很务实。" },
-        { w: "friction", phon: "/ˈfrɪkʃn/", pos: "n.", def: "摩擦 / 使用上的卡点", ex_en: "Understand the customer's friction.", ex_zh: "弄清客户的卡点。" },
-        { w: "posture", phon: "/ˈpɒstʃə/", pos: "n.", def: "姿态 / 立场（做事态度）", ex_en: "Copy the posture, not the title.", ex_zh: "抄姿态，不必抄头衔。" }
+        { w: "culture eats strategy", phon: "/ˈkʌltʃə iːts ˈstrætədʒi/", pos: "idiom", def: "文化胜过战略（再好的计划也架不住糟糕协作氛围）", def_en: "team habits beat plans if people fear speaking up", syn: ["culture beats plans", "habits over strategy"], ex_en: "Culture eats strategy.", ex_zh: "文化胜过战略。" },
+        { w: "know-it-all", phon: "/ˈnəʊ ɪt ɔːl/", pos: "n./adj.", def: "自以为无所不知的人 / 心态", def_en: "a person who acts as if they already know everything", syn: ["know-all", "closed-minded expert"], ex_en: "A know-it-all protects old answers.", ex_zh: "无所不知的人护着旧答案。" },
+        { w: "learn-it-all", phon: "/ˈlɜːn ɪt ɔːl/", pos: "n./adj.", def: "乐于持续学习的人 / 心态", def_en: "a person who stays curious and keeps learning", syn: ["lifelong learner", "curious learner"], ex_en: "Shift from know-it-all to learn-it-all.", ex_zh: "从无所不知转向乐于学习。" },
+        { w: "empathy", phon: "/ˈempəθi/", pos: "n.", def: "共情（站在对方处境理解）", def_en: "understanding how another person feels or works", syn: ["perspective-taking", "understanding others"], ex_en: "Empathy here is practical.", ex_zh: "这里的共情很务实。" },
+        { w: "friction", phon: "/ˈfrɪkʃn/", pos: "n.", def: "摩擦 / 使用上的卡点", def_en: "small pain points that slow someone down", syn: ["pain point", "hassle", "resistance"], ex_en: "Understand the customer's friction.", ex_zh: "弄清客户的卡点。" },
+        { w: "posture", phon: "/ˈpɒstʃə/", pos: "n.", def: "姿态 / 立场（做事态度）", def_en: "the attitude you take toward work or people", syn: ["stance", "mindset", "attitude"], ex_en: "Copy the posture, not the title.", ex_zh: "抄姿态，不必抄头衔。" }
       ],
       grammar: [
         { t: "not A; it is B", d: "先否定再给正解：Curiosity is not soft; it is a survival skill." },
@@ -342,20 +343,20 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "return to", phon: "/rɪˈtɜːn tuː/", pos: "v. phr.", def: "反复回到（某个话题）", ex_en: "He often returns to one idea.", ex_zh: "他常回到一个想法。" },
-      { w: "shift", phon: "/ʃɪft/", pos: "n./v.", def: "转变 / 转向", ex_en: "A shift from know-it-all to learn-it-all.", ex_zh: "从无所不知到乐于学习的转变。" },
-      { w: "curious", phon: "/ˈkjʊəriəs/", pos: "adj.", def: "好奇的", ex_en: "A learn-it-all stays curious.", ex_zh: "乐于学习的人保持好奇。" },
-      { w: "update a view", phon: "/ʌpˈdeɪt ə vjuː/", pos: "v. phr.", def: "更新看法", ex_en: "Update a view when new facts appear.", ex_zh: "有新事实就更新看法。" },
-      { w: "product cycle", phon: "/ˈprɒdʌkt ˈsaɪkl/", pos: "n.", def: "产品周期", ex_en: "In a fast product cycle.", ex_zh: "在快速产品周期里。" },
-      { w: "survival skill", phon: "/səˈvaɪvl skɪl/", pos: "n.", def: "生存技能", ex_en: "Curiosity is a survival skill.", ex_zh: "好奇心是生存技能。" },
-      { w: "ship a feature", phon: "/ʃɪp ə ˈfiːtʃə/", pos: "v. phr.", def: "上线一个功能", ex_en: "Before you ship a feature.", ex_zh: "上线功能之前。" },
-      { w: "internal metrics", phon: "/ɪnˈtɜːnl ˈmetrɪks/", pos: "n.", def: "内部指标", ex_en: "Only debates internal metrics.", ex_zh: "只辩论内部指标。" },
-      { w: "invite someone to speak", phon: "/ɪnˈvaɪt tə spiːk/", pos: "v. phr.", def: "邀请某人发言", ex_en: "Invite the quietest person to speak.", ex_zh: "请最安静的人发言。" },
-      { w: "vague agreement", phon: "/veɪɡ əˈɡriːmənt/", pos: "n.", def: "含糊的同意（没有落实）", ex_en: "Not vague agreement.", ex_zh: "不是含糊同意。" },
-      { w: "standup", phon: "/ˈstændʌp/", pos: "n.", def: "站会", ex_en: "In your next standup.", ex_zh: "在你的下次站会。" },
-      { w: "status update", phon: "/ˈsteɪtəs ˌʌpdeɪt/", pos: "n.", def: "状态汇报", ex_en: "Better than a long status update.", ex_zh: "比一长段状态汇报更好。" },
-      { w: "open discussion", phon: "/ˈəʊpən dɪˈskʌʃn/", pos: "v. phr.", def: "打开讨论（让人敢说）", ex_en: "That sentence opens better discussion.", ex_zh: "那句话能打开更好的讨论。" },
-      { w: "owner", phon: "/ˈəʊnə/", pos: "n.", def: "负责人（对事项负责的人）", ex_en: "End with owners and dates.", ex_zh: "结束时落实负责人和日期。" }
+      { w: "return to", phon: "/rɪˈtɜːn tuː/", pos: "v. phr.", def: "反复回到（某个话题）", def_en: "to come back to the same idea again", syn: ["come back to", "revisit"], ex_en: "He often returns to one idea.", ex_zh: "他常回到一个想法。" },
+      { w: "shift", phon: "/ʃɪft/", pos: "n./v.", def: "转变 / 转向", def_en: "a change from one state to another", syn: ["change", "move", "transition"], ex_en: "A shift from know-it-all to learn-it-all.", ex_zh: "从无所不知到乐于学习的转变。" },
+      { w: "curious", phon: "/ˈkjʊəriəs/", pos: "adj.", def: "好奇的", def_en: "eager to learn or ask questions", syn: ["inquisitive", "interested"], ex_en: "A learn-it-all stays curious.", ex_zh: "乐于学习的人保持好奇。" },
+      { w: "update a view", phon: "/ʌpˈdeɪt ə vjuː/", pos: "v. phr.", def: "更新看法", def_en: "to change your opinion when new facts appear", syn: ["revise an opinion", "change your mind"], ex_en: "Update a view when new facts appear.", ex_zh: "有新事实就更新看法。" },
+      { w: "product cycle", phon: "/ˈprɒdʌkt ˈsaɪkl/", pos: "n.", def: "产品周期", def_en: "the repeating process of building and shipping a product", syn: ["release cycle", "dev cycle"], ex_en: "In a fast product cycle.", ex_zh: "在快速产品周期里。" },
+      { w: "survival skill", phon: "/səˈvaɪvl skɪl/", pos: "n.", def: "生存技能", def_en: "a skill you need in order to keep succeeding", syn: ["must-have skill", "key skill"], ex_en: "Curiosity is a survival skill.", ex_zh: "好奇心是生存技能。" },
+      { w: "ship a feature", phon: "/ʃɪp ə ˈfiːtʃə/", pos: "v. phr.", def: "上线一个功能", def_en: "to release a new product capability to users", syn: ["release a feature", "launch a feature"], ex_en: "Before you ship a feature.", ex_zh: "上线功能之前。" },
+      { w: "internal metrics", phon: "/ɪnˈtɜːnl ˈmetrɪks/", pos: "n.", def: "内部指标", def_en: "numbers the company tracks inside itself", syn: ["in-house KPIs", "team stats"], ex_en: "Only debates internal metrics.", ex_zh: "只辩论内部指标。" },
+      { w: "invite someone to speak", phon: "/ɪnˈvaɪt tə spiːk/", pos: "v. phr.", def: "邀请某人发言", def_en: "to ask a quieter person to share their view", syn: ["ask to contribute", "draw someone in"], ex_en: "Invite the quietest person to speak.", ex_zh: "请最安静的人发言。" },
+      { w: "vague agreement", phon: "/veɪɡ əˈɡriːmənt/", pos: "n.", def: "含糊的同意（没有落实）", def_en: "a soft yes with no clear owner or date", syn: ["fuzzy yes", "unclear buy-in"], ex_en: "Not vague agreement.", ex_zh: "不是含糊同意。" },
+      { w: "standup", phon: "/ˈstændʌp/", pos: "n.", def: "站会", def_en: "a short daily team sync meeting", syn: ["daily sync", "scrum standup"], ex_en: "In your next standup.", ex_zh: "在你的下次站会。" },
+      { w: "status update", phon: "/ˈsteɪtəs ˌʌpdeɪt/", pos: "n.", def: "状态汇报", def_en: "a short report of what is happening", syn: ["progress report", "status note"], ex_en: "Better than a long status update.", ex_zh: "比一长段状态汇报更好。" },
+      { w: "open discussion", phon: "/ˈəʊpən dɪˈskʌʃn/", pos: "v. phr.", def: "打开讨论（让人敢说）", def_en: "to make it safer for people to speak honestly", syn: ["start dialogue", "unlock talk"], ex_en: "That sentence opens better discussion.", ex_zh: "那句话能打开更好的讨论。" },
+      { w: "owner", phon: "/ˈəʊnə/", pos: "n.", def: "负责人（对事项负责的人）", def_en: "the person accountable for a task", syn: ["assignee", "DRI", "point person"], ex_en: "End with owners and dates.", ex_zh: "结束时落实负责人和日期。" }
     ],
 
     grammar: [
@@ -462,12 +463,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "soft yes", phon: "/sɒft jes/", pos: "n.", def: "勉强答应（心里其实想拒绝）", ex_en: "A soft yes creates bigger problems later.", ex_zh: "勉强答应之后麻烦更大。" },
-        { w: "boundary", phon: "/ˈbaʊndri/", pos: "n.", def: "边界（能力/时间的界限）", ex_en: "Reason + boundary + option.", ex_zh: "原因 + 边界 + 备选。" },
-        { w: "at capacity", phon: "/æt kəˈpæsəti/", pos: "adj. phr.", def: "已满负荷 / 排满了", ex_en: "I'm at capacity until Friday.", ex_zh: "我周五前都满负荷。" },
-        { w: "pass this time", phon: "/pɑːs ðɪs taɪm/", pos: "v. phr.", def: "这次先算了 / 婉拒", ex_en: "I'll have to pass this time.", ex_zh: "这次只能先婉拒。" },
-        { w: "trade-off", phon: "/ˈtreɪd ɒf/", pos: "n.", def: "取舍 / 权衡", ex_en: "Forces a trade-off into the open.", ex_zh: "把取舍逼到台面上。" },
-        { w: "park it", phon: "/pɑːk ɪt/", pos: "v. phr.", def: "先搁置（稍后再议）", ex_en: "Can we park it?", ex_zh: "先放一放？" }
+        { w: "soft yes", phon: "/sɒft jes/", pos: "n.", def: "勉强答应（心里其实想拒绝）", def_en: "saying yes while you really want to refuse", syn: ["weak yes", "reluctant yes"], ex_en: "A soft yes creates bigger problems later.", ex_zh: "勉强答应之后麻烦更大。" },
+        { w: "boundary", phon: "/ˈbaʊndri/", pos: "n.", def: "边界（能力/时间的界限）", def_en: "a clear limit on time, scope, or capacity", syn: ["limit", "line", "cutoff"], ex_en: "Reason + boundary + option.", ex_zh: "原因 + 边界 + 备选。" },
+        { w: "at capacity", phon: "/æt kəˈpæsəti/", pos: "adj. phr.", def: "已满负荷 / 排满了", def_en: "already fully booked; no room for more work", syn: ["fully loaded", "maxed out"], ex_en: "I'm at capacity until Friday.", ex_zh: "我周五前都满负荷。" },
+        { w: "pass this time", phon: "/pɑːs ðɪs taɪm/", pos: "v. phr.", def: "这次先算了 / 婉拒", def_en: "to politely refuse for now", syn: ["decline for now", "sit this out"], ex_en: "I'll have to pass this time.", ex_zh: "这次只能先婉拒。" },
+        { w: "trade-off", phon: "/ˈtreɪd ɒf/", pos: "n.", def: "取舍 / 权衡", def_en: "giving up one thing to gain another", syn: ["compromise", "exchange", "balance"], ex_en: "Forces a trade-off into the open.", ex_zh: "把取舍逼到台面上。" },
+        { w: "park it", phon: "/pɑːk ɪt/", pos: "v. phr.", def: "先搁置（稍后再议）", def_en: "to pause a topic and return later", syn: ["set aside", "defer", "table it"], ex_en: "Can we park it?", ex_zh: "先放一放？" }
       ],
       grammar: [
         { t: "can't … because …", d: "拒绝时先给原因：I can't take this on because I'm closing the release." },
@@ -476,21 +477,21 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "rude", phon: "/ruːd/", pos: "adj.", def: "无礼的 / 粗鲁的", ex_en: "Fear sounding rude.", ex_zh: "怕显得无礼。" },
-      { w: "deadline", phon: "/ˈdedlaɪn/", pos: "n.", def: "截止日期", ex_en: "Missed deadlines.", ex_zh: "错过截止日期。" },
-      { w: "resentment", phon: "/rɪˈzentmənt/", pos: "n.", def: "怨恨 / 不满", ex_en: "Silent resentment.", ex_zh: "暗暗积怨。" },
-      { w: "ownership", phon: "/ˈəʊnəʃɪp/", pos: "n.", def: "归属责任 / 谁负责", ex_en: "Unclear ownership.", ex_zh: "责任不清。" },
-      { w: "overload", phon: "/ˌəʊvəˈləʊd/", pos: "n.", def: "过载 / 过量工作", ex_en: "Refuse the overload, not the person.", ex_zh: "拒绝过载，不是拒绝那个人。" },
-      { w: "firm", phon: "/fɜːm/", pos: "adj.", def: "坚定的 / 不含糊的", ex_en: "Warm but firm.", ex_zh: "暖但立场稳。" },
-      { w: "apology", phon: "/əˈpɒlədʒi/", pos: "n.", def: "道歉", ex_en: "Avoid long apologies.", ex_zh: "别长篇道歉。" },
-      { w: "cushion", phon: "/ˈkʊʃn/", pos: "n.", def: "缓冲垫；文中指软化语气的铺垫", ex_en: "Five soft cushions.", ex_zh: "五层软垫式铺垫。" },
-      { w: "scope", phon: "/skəʊp/", pos: "n.", def: "范围（项目边界）", ex_en: "Protect the scope.", ex_zh: "守住范围。" },
-      { w: "drop", phon: "/drɒp/", pos: "v.", def: "拿掉 / 砍掉（某项）", ex_en: "What should we drop?", ex_zh: "我们该去掉什么？" },
-      { w: "priority order", phon: "/praɪˈɒrəti ˈɔːdə/", pos: "n.", def: "优先级排序", ex_en: "Ask for a written priority order.", ex_zh: "请给出书面优先级。" },
-      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件", ex_en: "Make constraints visible.", ex_zh: "把约束摆到台面上。" },
-      { w: "decline", phon: "/dɪˈklaɪn/", pos: "v.", def: "婉拒 / 谢绝", ex_en: "I need to decline.", ex_zh: "我得婉拒。" },
-      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞 / 拖后腿", ex_en: "So I don't block the release.", ex_zh: "免得拖发版后腿。" },
-      { w: "professional", phon: "/prəˈfeʃənl/", pos: "adj.", def: "专业的", ex_en: "These lines sound professional.", ex_zh: "这些话听着专业。" }
+      { w: "rude", phon: "/ruːd/", pos: "adj.", def: "无礼的 / 粗鲁的", def_en: "impolite or disrespectful", syn: ["impolite", "harsh"], ex_en: "Fear sounding rude.", ex_zh: "怕显得无礼。" },
+      { w: "deadline", phon: "/ˈdedlaɪn/", pos: "n.", def: "截止日期", def_en: "the date when work must be finished", syn: ["due date", "cutoff"], ex_en: "Missed deadlines.", ex_zh: "错过截止日期。" },
+      { w: "resentment", phon: "/rɪˈzentmənt/", pos: "n.", def: "怨恨 / 不满", def_en: "quiet anger that builds over time", syn: ["bitterness", "grudge"], ex_en: "Silent resentment.", ex_zh: "暗暗积怨。" },
+      { w: "ownership", phon: "/ˈəʊnəʃɪp/", pos: "n.", def: "归属责任 / 谁负责", def_en: "clear responsibility for a result", syn: ["accountability", "who owns it"], ex_en: "Unclear ownership.", ex_zh: "责任不清。" },
+      { w: "overload", phon: "/ˌəʊvəˈləʊd/", pos: "n.", def: "过载 / 过量工作", def_en: "too much work for the time available", syn: ["too much load", "overwork"], ex_en: "Refuse the overload, not the person.", ex_zh: "拒绝过载，不是拒绝那个人。" },
+      { w: "firm", phon: "/fɜːm/", pos: "adj.", def: "坚定的 / 不含糊的", def_en: "clear and steady, not soft or unsure", syn: ["decisive", "resolute", "clear"], ex_en: "Warm but firm.", ex_zh: "暖但立场稳。" },
+      { w: "apology", phon: "/əˈpɒlədʒi/", pos: "n.", def: "道歉", def_en: "words that say you are sorry", syn: ["sorry note", "excuse me"], ex_en: "Avoid long apologies.", ex_zh: "别长篇道歉。" },
+      { w: "cushion", phon: "/ˈkʊʃn/", pos: "n.", def: "缓冲垫；文中指软化语气的铺垫", def_en: "soft filler words used to soften a message", syn: ["softener", "padding"], ex_en: "Five soft cushions.", ex_zh: "五层软垫式铺垫。" },
+      { w: "scope", phon: "/skəʊp/", pos: "n.", def: "范围（项目边界）", def_en: "what is included in the work — and what is not", syn: ["range", "boundaries", "coverage"], ex_en: "Protect the scope.", ex_zh: "守住范围。" },
+      { w: "drop", phon: "/drɒp/", pos: "v.", def: "拿掉 / 砍掉（某项）", def_en: "to remove an item from the plan", syn: ["cut", "remove", "leave out"], ex_en: "What should we drop?", ex_zh: "我们该去掉什么？" },
+      { w: "priority order", phon: "/praɪˈɒrəti ˈɔːdə/", pos: "n.", def: "优先级排序", def_en: "a ranked list of what matters most first", syn: ["ranked priorities", "order of importance"], ex_en: "Ask for a written priority order.", ex_zh: "请给出书面优先级。" },
+      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件", def_en: "a limit you must respect", syn: ["limit", "restriction", "boundary"], ex_en: "Make constraints visible.", ex_zh: "把约束摆到台面上。" },
+      { w: "decline", phon: "/dɪˈklaɪn/", pos: "v.", def: "婉拒 / 谢绝", def_en: "to say no in a polite way", syn: ["refuse", "turn down", "pass"], ex_en: "I need to decline.", ex_zh: "我得婉拒。" },
+      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞 / 拖后腿", def_en: "to stop progress on a critical path", syn: ["hold up", "obstruct", "stall"], ex_en: "So I don't block the release.", ex_zh: "免得拖发版后腿。" },
+      { w: "professional", phon: "/prəˈfeʃənl/", pos: "adj.", def: "专业的", def_en: "polite and appropriate at work", syn: ["work-appropriate", "businesslike"], ex_en: "These lines sound professional.", ex_zh: "这些话听着专业。" }
     ],
 
     grammar: [
@@ -602,12 +603,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "pull request", phon: "/pʊl rɪˈkwest/", pos: "n.", def: "合并请求（PR）", ex_en: "A pull request is not only code.", ex_zh: "PR 不只是代码。" },
-        { w: "reviewer", phon: "/rɪˈvjuːə/", pos: "n.", def: "代码审阅者", ex_en: "A short message to busy reviewers.", ex_zh: "写给忙碌审阅者的短信。" },
-        { w: "blast radius", phon: "/blɑːst ˈreɪdiəs/", pos: "n.", def: "影响范围 / 爆炸半径", ex_en: "They know the blast radius.", ex_zh: "他们知道爆炸半径。" },
-        { w: "test plan", phon: "/test plæn/", pos: "n.", def: "测试计划（如何验证）", ex_en: "Add a short test plan.", ex_zh: "加一段简短测试计划。" },
-        { w: "follow-up", phon: "/ˈfɒləʊ ʌp/", pos: "n.", def: "后续事项", ex_en: "Migrations and follow-ups.", ex_zh: "迁移与后续事项。" },
-        { w: "merge", phon: "/mɜːdʒ/", pos: "v.", def: "合并进主分支", ex_en: "It usually gets merged faster.", ex_zh: "通常合并得更快。" }
+        { w: "pull request", phon: "/pʊl rɪˈkwest/", pos: "n.", def: "合并请求（PR）", def_en: "a request to merge code into the main branch", syn: ["PR", "merge request"], ex_en: "A pull request is not only code.", ex_zh: "PR 不只是代码。" },
+        { w: "reviewer", phon: "/rɪˈvjuːə/", pos: "n.", def: "代码审阅者", def_en: "a person who checks someone else's code", syn: ["code reviewer", "approver"], ex_en: "A short message to busy reviewers.", ex_zh: "写给忙碌审阅者的短信。" },
+        { w: "blast radius", phon: "/blɑːst ˈreɪdiəs/", pos: "n.", def: "影响范围 / 爆炸半径", def_en: "how widely a change can break things", syn: ["impact area", "risk surface"], ex_en: "They know the blast radius.", ex_zh: "他们知道爆炸半径。" },
+        { w: "test plan", phon: "/test plæn/", pos: "n.", def: "测试计划（如何验证）", def_en: "steps that show how you verified the change", syn: ["verification steps", "how to test"], ex_en: "Add a short test plan.", ex_zh: "加一段简短测试计划。" },
+        { w: "follow-up", phon: "/ˈfɒləʊ ʌp/", pos: "n.", def: "后续事项", def_en: "later work that continues from this task", syn: ["next step", "later fix"], ex_en: "Migrations and follow-ups.", ex_zh: "迁移与后续事项。" },
+        { w: "merge", phon: "/mɜːdʒ/", pos: "v.", def: "合并进主分支", def_en: "to combine a branch into the main line", syn: ["land", "integrate"], ex_en: "It usually gets merged faster.", ex_zh: "通常合并得更快。" }
       ],
       grammar: [
         { t: "so + 结果", d: "说明目的/结果：Add retry … so a short network blip does not mark the order as failed." },
@@ -616,24 +617,24 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "diff", phon: "/dɪf/", pos: "n.", def: "代码差异", ex_en: "People open the diff with no map.", ex_zh: "别人打开 diff 没有地图。" },
-      { w: "webhook", phon: "/ˈwebhʊk/", pos: "n.", def: "Webhook（事件回调接口）", ex_en: "Retry for the payment webhook.", ex_zh: "为支付 webhook 加重试。" },
-      { w: "blip", phon: "/blɪp/", pos: "n.", def: "短暂故障 / 小抖动", ex_en: "A short network blip.", ex_zh: "短暂网络抖动。" },
-      { w: "boundary", phon: "/ˈbaʊndri/", pos: "n.", def: "边界（改动范围）", ex_en: "Boundaries reduce fear.", ex_zh: "边界能降低紧张感。" },
-      { w: "sandbox", phon: "/ˈsændbɒks/", pos: "n.", def: "沙箱 / 测试环境", ex_en: "Retried a 500 from the sandbox.", ex_zh: "在 sandbox 重试了一次 500。" },
-      { w: "confirmation", phon: "/ˌkɒnfəˈmeɪʃn/", pos: "n.", def: "确认", ex_en: "Review becomes confirmation.", ex_zh: "评审变成确认。" },
-      { w: "detective work", phon: "/dɪˈtektɪv wɜːk/", pos: "n.", def: "像侦探一样翻找线索", ex_en: "Not detective work.", ex_zh: "而不是侦探工作。" },
-      { w: "migration", phon: "/maɪˈɡreɪʃn/", pos: "n.", def: "（数据库等）迁移", ex_en: "API, UI, migrations.", ex_zh: "API、UI、迁移。" },
-      { w: "call out", phon: "/kɔːl aʊt/", pos: "v. phr.", def: "明确标出 / 点名提醒", ex_en: "Call out anything risky.", ex_zh: "把有风险的标出来。" },
-      { w: "risky", phon: "/ˈrɪski/", pos: "adj.", def: "有风险的", ex_en: "Anything risky at the top.", ex_zh: "顶部标出有风险的内容。" },
-      { w: "focus on", phon: "/ˈfəʊkəs ɒn/", pos: "v. phr.", def: "把注意力放在…", ex_en: "Please focus on the retry policy.", ex_zh: "请先看重试策略。" },
-      { w: "policy", phon: "/ˈpɒləsi/", pos: "n.", def: "策略（规则）", ex_en: "The retry policy.", ex_zh: "重试策略。" },
-      { w: "naming", phon: "/ˈneɪmɪŋ/", pos: "n.", def: "命名", ex_en: "Naming can wait.", ex_zh: "命名可以后说。" },
-      { w: "kindness", phon: "/ˈkaɪndnəs/", pos: "n.", def: "体贴 / 善意", ex_en: "A clear PR is a kindness.", ex_zh: "清晰的 PR 是一种体贴。" },
-      { w: "ship", phon: "/ʃɪp/", pos: "v.", def: "交付 / 上线", ex_en: "If you must ship a big change.", ex_zh: "若必须上线大改。" },
-      { w: "empty", phon: "/ˈempti/", pos: "adj.", def: "空的", ex_en: "If the description is empty.", ex_zh: "如果描述是空的。" },
-      { w: "rollback", phon: "/ˈrəʊlbæk/", pos: "n.", def: "回滚", ex_en: "Risk and rollback.", ex_zh: "风险与回滚。" },
-      { w: "template", phon: "/ˈtemplət/", pos: "n.", def: "模板", ex_en: "Build a personal PR template.", ex_zh: "建一份个人 PR 模板。" }
+      { w: "diff", phon: "/dɪf/", pos: "n.", def: "代码差异", def_en: "the code changes between two versions", syn: ["code change", "patch view"], ex_en: "People open the diff with no map.", ex_zh: "别人打开 diff 没有地图。" },
+      { w: "webhook", phon: "/ˈwebhʊk/", pos: "n.", def: "Webhook（事件回调接口）", def_en: "an HTTP callback triggered by an event", syn: ["event callback", "hook endpoint"], ex_en: "Retry for the payment webhook.", ex_zh: "为支付 webhook 加重试。" },
+      { w: "blip", phon: "/blɪp/", pos: "n.", def: "短暂故障 / 小抖动", def_en: "a short, small failure or glitch", syn: ["glitch", "brief outage"], ex_en: "A short network blip.", ex_zh: "短暂网络抖动。" },
+      { w: "boundary", phon: "/ˈbaʊndri/", pos: "n.", def: "边界（改动范围）", def_en: "a clear limit on time, scope, or capacity", syn: ["limit", "line", "cutoff"], ex_en: "Boundaries reduce fear.", ex_zh: "边界能降低紧张感。" },
+      { w: "sandbox", phon: "/ˈsændbɒks/", pos: "n.", def: "沙箱 / 测试环境", def_en: "a safe test environment, not production", syn: ["test env", "safe playground"], ex_en: "Retried a 500 from the sandbox.", ex_zh: "在 sandbox 重试了一次 500。" },
+      { w: "confirmation", phon: "/ˌkɒnfəˈmeɪʃn/", pos: "n.", def: "确认", def_en: "a check that something is correct", syn: ["verification", "double-check"], ex_en: "Review becomes confirmation.", ex_zh: "评审变成确认。" },
+      { w: "detective work", phon: "/dɪˈtektɪv wɜːk/", pos: "n.", def: "像侦探一样翻找线索", def_en: "slow searching for clues without a clear map", syn: ["investigation", "guesswork hunt"], ex_en: "Not detective work.", ex_zh: "而不是侦探工作。" },
+      { w: "migration", phon: "/maɪˈɡreɪʃn/", pos: "n.", def: "（数据库等）迁移", def_en: "a structured change to data or schema", syn: ["schema change", "data move"], ex_en: "API, UI, migrations.", ex_zh: "API、UI、迁移。" },
+      { w: "call out", phon: "/kɔːl aʊt/", pos: "v. phr.", def: "明确标出 / 点名提醒", def_en: "to clearly highlight something important", syn: ["flag", "point out", "highlight"], ex_en: "Call out anything risky.", ex_zh: "把有风险的标出来。" },
+      { w: "risky", phon: "/ˈrɪski/", pos: "adj.", def: "有风险的", def_en: "likely to cause problems if wrong", syn: ["dangerous", "high-risk"], ex_en: "Anything risky at the top.", ex_zh: "顶部标出有风险的内容。" },
+      { w: "focus on", phon: "/ˈfəʊkəs ɒn/", pos: "v. phr.", def: "把注意力放在…", def_en: "to put attention on one thing first", syn: ["concentrate on", "prioritize"], ex_en: "Please focus on the retry policy.", ex_zh: "请先看重试策略。" },
+      { w: "policy", phon: "/ˈpɒləsi/", pos: "n.", def: "策略（规则）", def_en: "a rule that guides how the system behaves", syn: ["rule set", "strategy"], ex_en: "The retry policy.", ex_zh: "重试策略。" },
+      { w: "naming", phon: "/ˈneɪmɪŋ/", pos: "n.", def: "命名", def_en: "choosing names for code or APIs", syn: ["name choice", "identifiers"], ex_en: "Naming can wait.", ex_zh: "命名可以后说。" },
+      { w: "kindness", phon: "/ˈkaɪndnəs/", pos: "n.", def: "体贴 / 善意", def_en: "a helpful act that reduces others' friction", syn: ["consideration", "care"], ex_en: "A clear PR is a kindness.", ex_zh: "清晰的 PR 是一种体贴。" },
+      { w: "ship", phon: "/ʃɪp/", pos: "v.", def: "交付 / 上线", def_en: "to deliver or release a product change", syn: ["release", "launch", "roll out"], ex_en: "If you must ship a big change.", ex_zh: "若必须上线大改。" },
+      { w: "empty", phon: "/ˈempti/", pos: "adj.", def: "空的", def_en: "containing nothing useful", syn: ["blank", "vacant"], ex_en: "If the description is empty.", ex_zh: "如果描述是空的。" },
+      { w: "rollback", phon: "/ˈrəʊlbæk/", pos: "n.", def: "回滚", def_en: "undoing a release to a previous safe version", syn: ["revert", "undo deploy"], ex_en: "Risk and rollback.", ex_zh: "风险与回滚。" },
+      { w: "template", phon: "/ˈtemplət/", pos: "n.", def: "模板", def_en: "a reusable form you fill each time", syn: ["boilerplate", "starter form"], ex_en: "Build a personal PR template.", ex_zh: "建一份个人 PR 模板。" }
     ],
 
     grammar: [
@@ -741,12 +742,12 @@ export const LESSONS = [
 
     core: {
       words: [
-        { w: "bug report", phon: "/bʌɡ rɪˈpɔːt/", pos: "n.", def: "缺陷报告 / Bug 单", ex_en: "A good bug report is a gift.", ex_zh: "好的 bug 报告是一份礼物。" },
-        { w: "reproduce", phon: "/ˌriːprəˈdjuːs/", pos: "v.", def: "复现（再次做出同样问题）", ex_en: "Write steps to reproduce.", ex_zh: "写复现步骤。" },
-        { w: "flaky", phon: "/ˈfleɪki/", pos: "adj.", def: "不稳定的（有时过有时挂）", ex_en: "If it is flaky, say how often.", ex_zh: "若不稳定，说明频率。" },
-        { w: "expected result", phon: "/ɪkˈspektɪd rɪˈzʌlt/", pos: "n.", def: "期望结果", ex_en: "Separate expected from actual.", ex_zh: "把期望与实际分开。" },
-        { w: "actual result", phon: "/ˈæktʃuəl rɪˈzʌlt/", pos: "n.", def: "实际结果", ex_en: "Actual: API returns 500.", ex_zh: "实际：API 返回 500。" },
-        { w: "triage", phon: "/ˈtriːɑːʒ/", pos: "n./v.", def: "分诊 / 按优先级处理", ex_en: "Impact helps triage.", ex_zh: "影响说明有助于分诊。" }
+        { w: "bug report", phon: "/bʌɡ rɪˈpɔːt/", pos: "n.", def: "缺陷报告 / Bug 单", def_en: "a written note that describes a software defect", syn: ["defect ticket", "issue report"], ex_en: "A good bug report is a gift.", ex_zh: "好的 bug 报告是一份礼物。" },
+        { w: "reproduce", phon: "/ˌriːprəˈdjuːs/", pos: "v.", def: "复现（再次做出同样问题）", def_en: "to make the same bug happen again on purpose", syn: ["recreate", "trigger again"], ex_en: "Write steps to reproduce.", ex_zh: "写复现步骤。" },
+        { w: "flaky", phon: "/ˈfleɪki/", pos: "adj.", def: "不稳定的（有时过有时挂）", def_en: "fails sometimes and passes other times", syn: ["unreliable", "intermittent"], ex_en: "If it is flaky, say how often.", ex_zh: "若不稳定，说明频率。" },
+        { w: "expected result", phon: "/ɪkˈspektɪd rɪˈzʌlt/", pos: "n.", def: "期望结果", def_en: "what should happen if the system is correct", syn: ["desired outcome", "should-be result"], ex_en: "Separate expected from actual.", ex_zh: "把期望与实际分开。" },
+        { w: "actual result", phon: "/ˈæktʃuəl rɪˈzʌlt/", pos: "n.", def: "实际结果", def_en: "what really happened instead", syn: ["observed result", "what you saw"], ex_en: "Actual: API returns 500.", ex_zh: "实际：API 返回 500。" },
+        { w: "triage", phon: "/ˈtriːɑːʒ/", pos: "n./v.", def: "分诊 / 按优先级处理", def_en: "to sort issues by urgency and impact", syn: ["prioritize", "sort by severity"], ex_en: "Impact helps triage.", ex_zh: "影响说明有助于分诊。" }
       ],
       grammar: [
         { t: "Prefer A over B", d: "更推荐 A：Prefer facts over feelings." },
@@ -755,22 +756,22 @@ export const LESSONS = [
     },
 
     vocab: [
-      { w: "chat thread", phon: "/tʃæt θred/", pos: "n.", def: "聊天串 / 讨论串", ex_en: "A long chat thread.", ex_zh: "很长的聊天串。" },
-      { w: "search space", phon: "/sɜːtʃ speɪs/", pos: "n.", def: "排查范围", ex_en: "Cut the search space in half.", ex_zh: "把排查范围砍掉一半。" },
-      { w: "staging", phon: "/ˈsteɪdʒɪŋ/", pos: "n.", def: "预发 / 测试环境", ex_en: "Happens in staging only.", ex_zh: "只在 staging 出现。" },
-      { w: "production", phon: "/prəˈdʌkʃn/", pos: "n.", def: "生产环境", ex_en: "Also in production.", ex_zh: "生产环境也有。" },
-      { w: "checklist", phon: "/ˈtʃeklɪst/", pos: "n.", def: "核对清单", ex_en: "A short checklist.", ex_zh: "简短清单。" },
-      { w: "request ID", phon: "/rɪˈkwest aɪˈdiː/", pos: "n.", def: "请求编号（日志追踪用）", ex_en: "Attach a request ID.", ex_zh: "附上 request ID。" },
-      { w: "blank screen", phon: "/blæŋk skriːn/", pos: "n.", def: "白屏", ex_en: "UI shows a blank screen.", ex_zh: "界面白屏。" },
-      { w: "deploy", phon: "/dɪˈplɔɪ/", pos: "n./v.", def: "发版 / 部署", ex_en: "Checked recent deploys.", ex_zh: "查过最近发版。" },
-      { w: "feature flag", phon: "/ˈfiːtʃə flæɡ/", pos: "n.", def: "功能开关", ex_en: "Checked feature flags.", ex_zh: "查过功能开关。" },
-      { w: "duplicate work", phon: "/ˈdjuːplɪkeɪt wɜːk/", pos: "n.", def: "重复劳动", ex_en: "Prevents duplicate work.", ex_zh: "避免重复劳动。" },
-      { w: "impact", phon: "/ˈɪmpækt/", pos: "n.", def: "影响（范围/严重度）", ex_en: "End with impact and urgency.", ex_zh: "最后写影响和紧急程度。" },
-      { w: "urgency", phon: "/ˈɜːdʒənsi/", pos: "n.", def: "紧急程度", ex_en: "Impact and urgency.", ex_zh: "影响与紧急程度。" },
-      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞（关键流程）", ex_en: "Blocks checkout for EU users.", ex_zh: "阻塞欧盟用户结账。" },
-      { w: "pair", phon: "/peə/", pos: "v.", def: "结对（一起排查/写代码）", ex_en: "Offer to pair.", ex_zh: "提出结对排查。" },
-      { w: "ticket", phon: "/ˈtɪkɪt/", pos: "n.", def: "工单", ex_en: "These lines travel well in tickets.", ex_zh: "这几行在工单里很好用。" },
-      { w: "cut … in half", phon: "/kʌt ɪn hɑːf/", pos: "v. phr.", def: "减半", ex_en: "Cut the search space in half.", ex_zh: "把范围砍掉一半。" }
+      { w: "chat thread", phon: "/tʃæt θred/", pos: "n.", def: "聊天串 / 讨论串", def_en: "a long message chain in chat", syn: ["message chain", "discussion thread"], ex_en: "A long chat thread.", ex_zh: "很长的聊天串。" },
+      { w: "search space", phon: "/sɜːtʃ speɪs/", pos: "n.", def: "排查范围", def_en: "the set of places you still need to check", syn: ["investigation scope", "places to look"], ex_en: "Cut the search space in half.", ex_zh: "把排查范围砍掉一半。" },
+      { w: "staging", phon: "/ˈsteɪdʒɪŋ/", pos: "n.", def: "预发 / 测试环境", def_en: "a pre-production environment for testing", syn: ["pre-prod", "test stage"], ex_en: "Happens in staging only.", ex_zh: "只在 staging 出现。" },
+      { w: "production", phon: "/prəˈdʌkʃn/", pos: "n.", def: "生产环境", def_en: "the live environment that real users hit", syn: ["prod", "live env"], ex_en: "Also in production.", ex_zh: "生产环境也有。" },
+      { w: "checklist", phon: "/ˈtʃeklɪst/", pos: "n.", def: "核对清单", def_en: "a short numbered list of steps", syn: ["step list", "todo list"], ex_en: "A short checklist.", ex_zh: "简短清单。" },
+      { w: "request ID", phon: "/rɪˈkwest aɪˈdiː/", pos: "n.", def: "请求编号（日志追踪用）", def_en: "an ID that helps find one request in logs", syn: ["trace id", "correlation id"], ex_en: "Attach a request ID.", ex_zh: "附上 request ID。" },
+      { w: "blank screen", phon: "/blæŋk skriːn/", pos: "n.", def: "白屏", def_en: "a UI that shows nothing useful", syn: ["white screen", "empty UI"], ex_en: "UI shows a blank screen.", ex_zh: "界面白屏。" },
+      { w: "deploy", phon: "/dɪˈplɔɪ/", pos: "n./v.", def: "发版 / 部署", def_en: "to put a new version into an environment", syn: ["release", "ship to env"], ex_en: "Checked recent deploys.", ex_zh: "查过最近发版。" },
+      { w: "feature flag", phon: "/ˈfiːtʃə flæɡ/", pos: "n.", def: "功能开关", def_en: "a switch that turns a feature on or off", syn: ["feature toggle", "kill switch"], ex_en: "Checked feature flags.", ex_zh: "查过功能开关。" },
+      { w: "duplicate work", phon: "/ˈdjuːplɪkeɪt wɜːk/", pos: "n.", def: "重复劳动", def_en: "doing the same investigation twice", syn: ["repeated effort", "rework"], ex_en: "Prevents duplicate work.", ex_zh: "避免重复劳动。" },
+      { w: "impact", phon: "/ˈɪmpækt/", pos: "n.", def: "影响（范围/严重度）", def_en: "how many users or flows are hurt", syn: ["effect", "blast", "severity"], ex_en: "End with impact and urgency.", ex_zh: "最后写影响和紧急程度。" },
+      { w: "urgency", phon: "/ˈɜːdʒənsi/", pos: "n.", def: "紧急程度", def_en: "how soon the issue needs action", syn: ["time pressure", "priority level"], ex_en: "Impact and urgency.", ex_zh: "影响与紧急程度。" },
+      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞（关键流程）", def_en: "to stop progress on a critical path", syn: ["hold up", "obstruct", "stall"], ex_en: "Blocks checkout for EU users.", ex_zh: "阻塞欧盟用户结账。" },
+      { w: "pair", phon: "/peə/", pos: "v.", def: "结对（一起排查/写代码）", def_en: "to work together with someone in real time", syn: ["pair-program", "debug together"], ex_en: "Offer to pair.", ex_zh: "提出结对排查。" },
+      { w: "ticket", phon: "/ˈtɪkɪt/", pos: "n.", def: "工单", def_en: "a tracked work item in a tool like Jira", syn: ["issue", "work item"], ex_en: "These lines travel well in tickets.", ex_zh: "这几行在工单里很好用。" },
+      { w: "cut … in half", phon: "/kʌt ɪn hɑːf/", pos: "v. phr.", def: "减半", def_en: "to reduce something by about 50%", syn: ["halve", "reduce by half"], ex_en: "Cut the search space in half.", ex_zh: "把范围砍掉一半。" }
     ],
 
     grammar: [

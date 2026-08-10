@@ -704,6 +704,142 @@ export const LESSONS = [
         explain: "Helps reviewers spend time where it matters."
       }
     ]
+  },
+
+  {
+    id: "2026-08-11-reading",
+    date: "2026-08-11",
+    title: "Write a bug report that gets fixed fast",
+    source: "IT / 软件开发 · Bug 报告短教程",
+    tags: ["IT", "协作", "调试"],
+    kind: "reading",
+    durationMin: 4,
+    stats: { words: 410, newWords: 16, minutes: 4 },
+
+    passage: [
+      {
+        en: "A good bug report is a gift to the next engineer. A weak one creates a long chat thread and little progress. Busy teams do not need perfect writing. They need a clear path: what broke, how to see it again, and what \"fixed\" should look like. If that path is missing, people guess — and guessing wastes a sprint.",
+        zh: "一份好的 bug 报告是给下一位工程师的礼物；差的则会拉出很长的聊天串，却几乎没有进展。忙碌的团队不需要完美文笔，需要的是清晰路径：坏了什么、如何复现、怎样才算修好。缺了这条路径，大家只能猜——而猜测会浪费一个 sprint。"
+      },
+      {
+        en: "Start with a one-line summary that a stranger can search later. Prefer facts over feelings: \"Checkout fails with 500 when coupon code is empty\" beats \"Payment is broken again.\" Then state the environment: browser or app version, region, account type, and whether it happens in staging only or also in production. Small details often cut the search space in half.",
+        zh: "先写一行摘要，让陌生人以后也能搜到。多用事实、少用情绪：\"优惠码为空时结账返回 500\" 好过 \"支付又坏了。\" 再写环境：浏览器或 App 版本、地区、账号类型，以及只在 staging 出现还是生产也有。小细节常常能把排查范围砍掉一半。"
+      },
+      {
+        en: "Write steps to reproduce as a short checklist. Number them. Include the exact URL, sample input, and the last action before the failure. If it is flaky, say how often it fails — \"3 of 5 tries\" is more useful than \"sometimes.\" Attach a screenshot, a short video, or a request ID from the logs when you have one.",
+        zh: "把复现步骤写成简短清单并编号。写上确切 URL、示例输入，以及失败前的最后一步。若不稳定，说明失败频率——\"5 次里 3 次\" 比 \"有时\" 有用得多。有的话附上截图、短视频，或日志里的 request ID。"
+      },
+      {
+        en: "Separate expected result from actual result. Expected: \"Order is created and the user sees a confirmation page.\" Actual: \"API returns 500; UI shows a blank screen.\" This split stops debates about taste and focuses the fix. If you already checked recent deploys or feature flags, note that under \"What I tried.\" It prevents duplicate work.",
+        zh: "把期望结果和实际结果分开写。期望：\"订单已创建，用户看到确认页。\" 实际：\"API 返回 500；界面白屏。\" 这样拆开能减少品味之争，把焦点放在修复上。若你已查过最近发版或 feature flag，写在 \"What I tried\" 下面，避免别人重复劳动。"
+      },
+      {
+        en: "End with impact and urgency, but stay calm. \"Blocks checkout for EU users on mobile web\" helps triage. Offer to pair if the bug is hard to catch. In English, these lines travel well in tickets: \"Steps to reproduce,\" \"Expected / Actual,\" and \"Impact.\" Clear reports get fixed faster because trust starts before the first code change.",
+        zh: "最后写影响和紧急程度，但语气保持冷静。\"阻塞欧盟用户在 mobile web 上的结账\" 有助于分诊。若 bug 难抓，可以提出结对排查。工单里这几行英文很好用：\"Steps to reproduce\"、\"Expected / Actual\"、\"Impact\"。清晰的报告修得更快——因为信任在第一次改代码之前就开始了。"
+      }
+    ],
+
+    core: {
+      words: [
+        { w: "bug report", phon: "/bʌɡ rɪˈpɔːt/", pos: "n.", def: "缺陷报告 / Bug 单", ex_en: "A good bug report is a gift.", ex_zh: "好的 bug 报告是一份礼物。" },
+        { w: "reproduce", phon: "/ˌriːprəˈdjuːs/", pos: "v.", def: "复现（再次做出同样问题）", ex_en: "Write steps to reproduce.", ex_zh: "写复现步骤。" },
+        { w: "flaky", phon: "/ˈfleɪki/", pos: "adj.", def: "不稳定的（有时过有时挂）", ex_en: "If it is flaky, say how often.", ex_zh: "若不稳定，说明频率。" },
+        { w: "expected result", phon: "/ɪkˈspektɪd rɪˈzʌlt/", pos: "n.", def: "期望结果", ex_en: "Separate expected from actual.", ex_zh: "把期望与实际分开。" },
+        { w: "actual result", phon: "/ˈæktʃuəl rɪˈzʌlt/", pos: "n.", def: "实际结果", ex_en: "Actual: API returns 500.", ex_zh: "实际：API 返回 500。" },
+        { w: "triage", phon: "/ˈtriːɑːʒ/", pos: "n./v.", def: "分诊 / 按优先级处理", ex_en: "Impact helps triage.", ex_zh: "影响说明有助于分诊。" }
+      ],
+      grammar: [
+        { t: "Prefer A over B", d: "更推荐 A：Prefer facts over feelings." },
+        { t: "If …, say …", d: "条件建议：If it is flaky, say how often it fails." }
+      ]
+    },
+
+    vocab: [
+      { w: "chat thread", phon: "/tʃæt θred/", pos: "n.", def: "聊天串 / 讨论串", ex_en: "A long chat thread.", ex_zh: "很长的聊天串。" },
+      { w: "search space", phon: "/sɜːtʃ speɪs/", pos: "n.", def: "排查范围", ex_en: "Cut the search space in half.", ex_zh: "把排查范围砍掉一半。" },
+      { w: "staging", phon: "/ˈsteɪdʒɪŋ/", pos: "n.", def: "预发 / 测试环境", ex_en: "Happens in staging only.", ex_zh: "只在 staging 出现。" },
+      { w: "production", phon: "/prəˈdʌkʃn/", pos: "n.", def: "生产环境", ex_en: "Also in production.", ex_zh: "生产环境也有。" },
+      { w: "checklist", phon: "/ˈtʃeklɪst/", pos: "n.", def: "核对清单", ex_en: "A short checklist.", ex_zh: "简短清单。" },
+      { w: "request ID", phon: "/rɪˈkwest aɪˈdiː/", pos: "n.", def: "请求编号（日志追踪用）", ex_en: "Attach a request ID.", ex_zh: "附上 request ID。" },
+      { w: "blank screen", phon: "/blæŋk skriːn/", pos: "n.", def: "白屏", ex_en: "UI shows a blank screen.", ex_zh: "界面白屏。" },
+      { w: "deploy", phon: "/dɪˈplɔɪ/", pos: "n./v.", def: "发版 / 部署", ex_en: "Checked recent deploys.", ex_zh: "查过最近发版。" },
+      { w: "feature flag", phon: "/ˈfiːtʃə flæɡ/", pos: "n.", def: "功能开关", ex_en: "Checked feature flags.", ex_zh: "查过功能开关。" },
+      { w: "duplicate work", phon: "/ˈdjuːplɪkeɪt wɜːk/", pos: "n.", def: "重复劳动", ex_en: "Prevents duplicate work.", ex_zh: "避免重复劳动。" },
+      { w: "impact", phon: "/ˈɪmpækt/", pos: "n.", def: "影响（范围/严重度）", ex_en: "End with impact and urgency.", ex_zh: "最后写影响和紧急程度。" },
+      { w: "urgency", phon: "/ˈɜːdʒənsi/", pos: "n.", def: "紧急程度", ex_en: "Impact and urgency.", ex_zh: "影响与紧急程度。" },
+      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞（关键流程）", ex_en: "Blocks checkout for EU users.", ex_zh: "阻塞欧盟用户结账。" },
+      { w: "pair", phon: "/peə/", pos: "v.", def: "结对（一起排查/写代码）", ex_en: "Offer to pair.", ex_zh: "提出结对排查。" },
+      { w: "ticket", phon: "/ˈtɪkɪt/", pos: "n.", def: "工单", ex_en: "These lines travel well in tickets.", ex_zh: "这几行在工单里很好用。" },
+      { w: "cut … in half", phon: "/kʌt ɪn hɑːf/", pos: "v. phr.", def: "减半", ex_en: "Cut the search space in half.", ex_zh: "把范围砍掉一半。" }
+    ],
+
+    grammar: [
+      {
+        t: "Prefer A over B",
+        pattern: "Prefer facts over feelings.",
+        rule: "工程写作里常用来对比「更好的写法」和「较差的写法」。",
+        examples: [
+          { en: "Prefer facts over feelings in the summary.", zh: "摘要里多用事实、少用情绪。" }
+        ]
+      },
+      {
+        t: "Expected / Actual 对照",
+        pattern: "Expected: …. Actual: ….",
+        rule: "Bug 单固定结构：先写应该怎样，再写实际怎样，减少误解。",
+        examples: [
+          { en: "Expected: Order is created. Actual: API returns 500.", zh: "期望：订单已创建。实际：API 返回 500。" }
+        ]
+      }
+    ],
+
+    quiz: [
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者认为好的 bug 报告最需要提供什么？",
+        options: [
+          "完美的文学修辞",
+          "清晰路径：坏了什么、如何复现、怎样算修好",
+          "一长串情绪抱怨",
+          "只贴一张截图、不写步骤"
+        ],
+        answer: 1,
+        explain: "They need a clear path: what broke, how to see it again, and what \"fixed\" should look like."
+      },
+      {
+        type: "fill",
+        tag: "语言点",
+        q: "Write steps to ____ as a short checklist.",
+        answer: "reproduce",
+        explain: "原文：steps to reproduce（复现步骤）。"
+      },
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "为什么要把 Expected 和 Actual 分开写？",
+        options: [
+          "为了让工单看起来更长",
+          "减少品味之争，把焦点放在修复上",
+          "这样就不需要环境信息",
+          "这样可以跳过复现步骤"
+        ],
+        answer: 1,
+        explain: "This split stops debates about taste and focuses the fix."
+      },
+      {
+        type: "choice",
+        tag: "语言点",
+        q: "文中 \"triage\" 最接近的意思是？",
+        options: [
+          "写单元测试",
+          "按优先级分诊处理",
+          "合并 pull request",
+          "删除旧工单"
+        ],
+        answer: 1,
+        explain: "Impact helps triage = 影响说明有助于按优先级处理。"
+      }
+    ]
   }
 
 ]

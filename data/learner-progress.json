@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-08-10T00:07:44.869Z",
+  "updatedAt": "2026-08-10T00:19:03.873Z",
   "lessons": {
     "2026-07-30": {
       "done": true,
@@ -42,16 +42,29 @@
     },
     "2026-08-09-reading": {
       "difficulty": "easy",
-      "updatedAt": "2026-08-10T00:07:44.869Z",
-      "note": "非常有用的文章，获益匪浅。"
+      "updatedAt": "2026-08-10T00:11:41.972Z",
+      "note": "非常有用的文章，获益匪浅。",
+      "done": true
+    },
+    "2026-08-10-reading": {
+      "difficulty": "ok",
+      "updatedAt": "2026-08-10T00:19:03.873Z",
+      "note": "这篇也很实用。",
+      "done": true
     }
   },
   "feedback": {
     "reading": {
       "easy": 1,
-      "ok": 1,
+      "ok": 2,
       "hard": 2,
       "recent": [
+        {
+          "id": "2026-08-10-reading",
+          "difficulty": "ok",
+          "note": "这篇也很实用。",
+          "at": "2026-08-10T00:19:01.057Z"
+        },
         {
           "id": "2026-08-09-reading",
           "difficulty": "easy",

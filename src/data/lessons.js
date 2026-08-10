@@ -571,28 +571,32 @@ export const LESSONS = [
     tags: ["IT", "Git", "协作"],
     kind: "reading",
     durationMin: 4,
-    stats: { words: 400, newWords: 16, minutes: 4 },
+    stats: { words: 390, newWords: 18, minutes: 4 },
 
     passage: [
       {
-        en: "A pull request is not only code. It is a short message to busy reviewers. If the description is empty, people open the diff with no map. They miss the why, ask the same questions in the comments, and the review takes longer than the change itself. In a global team, a clear PR also saves meetings.",
-        zh: "Pull request 不只是代码，更是写给忙碌审阅者的短信。描述空着，别人打开 diff 就没有地图：看不出为什么改、在评论里反复问同一问题，评审比改动本身还久。在跨国团队里，清晰的 PR 还能少开几次会。"
+        en: "A pull request is not only code. It is a short message to busy reviewers. If the description is empty, people open the diff with no map. They miss the why, ask the same questions in the comments, and the review takes longer than the change itself. In a global team, a clear PR also saves meetings, because context travels with the change instead of living only in your head.",
+        zh: "Pull request 不只是代码，更是写给忙碌审阅者的短信。描述空着，别人打开 diff 就没有地图：看不出为什么改、在评论里反复问同一问题，评审比改动本身还久。在跨国团队里，清晰的 PR 还能少开会——上下文跟着改动走，而不是只留在你脑子里。"
       },
       {
-        en: "Start with one clear sentence: what changed and why. Example: \"Add retry for the payment webhook so a short network blip does not mark the order as failed.\" Then list what you did not change. Boundaries reduce fear. Reviewers relax when they know the blast radius — which services, tables, or feature flags are touched.",
-        zh: "先用一句说清：改了什么、为什么。例如：\"为支付 webhook 加了重试，避免短暂网络抖动把订单标成失败。\" 再列出你没动什么。边界能降低紧张感——审阅者知道爆炸半径后会更放松：动了哪些服务、表或 feature flag。"
+        en: "Start with one clear sentence: what changed and why. Example: \"Add retry for the payment webhook so a short network blip does not mark the order as failed.\" Then list what you did not change. Boundaries reduce fear. Reviewers relax when they know the blast radius — which services, tables, or feature flags are touched. If there is a linked ticket, put the ID near the top.",
+        zh: "先用一句说清：改了什么、为什么。例如：\"为支付 webhook 加了重试，避免短暂网络抖动把订单标成失败。\" 再列出你没动什么。边界能降低紧张感——审阅者知道爆炸半径后会更放松：动了哪些服务、表或 feature flag。若有关联工单，把编号放在靠前的位置。"
       },
       {
-        en: "Add a short test plan. Write the exact commands or clicks you used. \"Ran npm test\" is weak. \"Ran npm test payments && manually retried a 500 from the sandbox webhook\" is useful. Good test notes turn review into confirmation, not detective work. If CI is red, say why you still want a first look.",
-        zh: "加一段简短测试计划：写你用过的具体命令或点击。\"Ran npm test\" 太弱；\"Ran npm test payments，并在 sandbox webhook 上手动重试了一次 500\" 才有用。好的测试说明让评审变成确认，而不是侦探工作。若 CI 还是红的，说明为何仍想先让人看一眼。"
+        en: "Add a short test plan. Write the exact commands or clicks you used. \"Ran npm test\" is weak. \"Ran npm test payments && manually retried a 500 from the sandbox webhook\" is useful. Good test notes turn review into confirmation, not detective work. If CI is red, say why you still want a first look, and what remains before merge.",
+        zh: "加一段简短测试计划：写你用过的具体命令或点击。\"Ran npm test\" 太弱；\"Ran npm test payments，并在 sandbox webhook 上手动重试了一次 500\" 才有用。好的测试说明让评审变成确认，而不是侦探工作。若 CI 还是红的，说明为何仍想先让人看一眼，以及合并前还剩什么。"
       },
       {
-        en: "Keep the diff small when you can. Large PRs hide risk and tire reviewers. If you must ship a big change, split the description into sections: API, UI, migrations, and follow-ups. Call out anything risky in a warning line at the top, such as a data backfill or a temporary feature flag.",
-        zh: "能小就小。大 PR 容易藏风险，也让审阅者疲劳。若必须一次上大改，把描述拆成几块：API、UI、迁移、后续事项。有风险的内容用置顶警告行标出来，比如数据回填或临时 feature flag。"
+        en: "Keep the diff small when you can. Large PRs hide risk and tire reviewers. If you must ship a big change, split the description into sections: API, UI, migrations, and follow-ups. Call out anything risky in a warning line at the top, such as a data backfill or a temporary feature flag. Screenshots help for UI; sequence notes help for async flows.",
+        zh: "能小就小。大 PR 容易藏风险，也让审阅者疲劳。若必须一次上大改，把描述拆成几块：API、UI、迁移、后续事项。有风险的内容用置顶警告行标出来，比如数据回填或临时 feature flag。UI 可配截图；异步流程可写步骤说明。"
       },
       {
-        en: "End with how to give feedback. \"Please focus on the retry policy; naming can wait.\" This helps reviewers spend time where it matters. Reply to comments with the same clarity: agree, explain, or open a follow-up ticket. A clear PR is a kindness — and it usually gets merged faster.",
-        zh: "最后说明希望对方怎么给反馈：\"请先看重试策略；命名可以后说。\" 这能让审阅者把时间花在刀刃上。回复评论时同样清楚：同意、解释，或开一个后续 ticket。清晰的 PR 是一种体贴——也通常合并得更快。"
+        en: "End with how to give feedback. \"Please focus on the retry policy; naming can wait.\" This helps reviewers spend time where it matters. Reply to comments with the same clarity: agree, explain, or open a follow-up ticket. Do not leave threads hanging.",
+        zh: "最后说明希望对方怎么给反馈：\"请先看重试策略；命名可以后说。\" 这能让审阅者把时间花在刀刃上。回复评论时同样清楚：同意、解释，或开一个后续 ticket。别让讨论串悬着。"
+      },
+      {
+        en: "Over time, build a personal PR template in your repo. Keep sections for summary, test plan, risk, and rollback. Templates feel boring until a busy Monday arrives. Then they save everyone ten minutes — and those minutes compound across the team. A clear PR is a kindness, and it usually gets merged faster because trust is easier when intent is visible.",
+        zh: "慢慢在仓库里建一份个人 PR 模板：摘要、测试计划、风险、回滚。平时觉得无聊，直到某个忙碌的周一才会显出价值。那时能给每人省十分钟——这些分钟在团队里会复利。清晰的 PR 是一种体贴；意图可见时更易建立信任，也通常合并得更快。"
       }
     ],
 
@@ -627,7 +631,9 @@ export const LESSONS = [
       { w: "naming", phon: "/ˈneɪmɪŋ/", pos: "n.", def: "命名", ex_en: "Naming can wait.", ex_zh: "命名可以后说。" },
       { w: "kindness", phon: "/ˈkaɪndnəs/", pos: "n.", def: "体贴 / 善意", ex_en: "A clear PR is a kindness.", ex_zh: "清晰的 PR 是一种体贴。" },
       { w: "ship", phon: "/ʃɪp/", pos: "v.", def: "交付 / 上线", ex_en: "If you must ship a big change.", ex_zh: "若必须上线大改。" },
-      { w: "empty", phon: "/ˈempti/", pos: "adj.", def: "空的", ex_en: "If the description is empty.", ex_zh: "如果描述是空的。" }
+      { w: "empty", phon: "/ˈempti/", pos: "adj.", def: "空的", ex_en: "If the description is empty.", ex_zh: "如果描述是空的。" },
+      { w: "rollback", phon: "/ˈrəʊlbæk/", pos: "n.", def: "回滚", ex_en: "Risk and rollback.", ex_zh: "风险与回滚。" },
+      { w: "template", phon: "/ˈtemplət/", pos: "n.", def: "模板", ex_en: "Build a personal PR template.", ex_zh: "建一份个人 PR 模板。" }
     ],
 
     grammar: [

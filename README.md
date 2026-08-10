@@ -51,7 +51,7 @@ npm run dev        # http://127.0.0.1:5850/
 | 你说 | Claude 做 |
 |------|-----------|
 | 给 `.srt` / 文稿 /「拆这段精听」 | 按 ~1 分钟拆份 + 时间戳 + 系列分析 |
-| 「生成今日阅读」 | 从选题池随机一篇短文（IT/商务/生活/体育/经济/名人/名著…） |
+| 「生成今日阅读」 | 加权：多 IT/软件开发 + 职场邮件场景（约 400 词） |
 | 「今天的反馈你看看」+ 粘贴复制内容 | 更新水平评估、调整以后选材 |
 | 贴一个生词 | 补进对应课词表 |
 
@@ -87,8 +87,11 @@ learn_en/
 
 ## 进度存在哪
 
-- UI 偏好：`localStorage["en_reader_v2"]`
-- 打卡 + 阅读反馈：`localStorage["en_reader_progress"]`（可导出/导入）
+- **学习进度 / 反馈（跟仓库走）**：[`data/learner-progress.json`](data/learner-progress.json)  
+  - 用 `npm run dev` 学习时会自动写入  
+  - 换电脑：`git pull` 就能带上进度；学完后 `git add` + commit + push 同步到 GitHub  
+- UI 偏好（主题等）：浏览器 `localStorage`（各机器可不同）
+- 也可点「导出进度」手动下载备份
 
 ---
 

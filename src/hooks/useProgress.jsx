@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -10,6 +11,7 @@ import {
   applyAssessment,
   applyReadingFeedback,
   downloadProgress,
+  emptyProgressFile,
   formatFeedbackForCopy,
   loadProgress,
   mergeProgress,
@@ -45,15 +47,49 @@ function upsert(file, lessonId, done) {
 }
 
 export function ProgressProvider({ children }) {
-  const [progress, setProgress] = useState(() => loadProgress())
+  const [progress, setProgress] = useState(() => emptyProgressFile())
+  const [ready, setReady] = useState(false)
+  const [fileSync, setFileSync] = useState({ ok: null, saving: false })
   const progressRef = useRef(progress)
   progressRef.current = progress
+  const saveTimer = useRef(null)
 
-  const commit = useCallback((next) => {
-    setProgress(next)
-    progressRef.current = next
-    saveProgress(next)
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      const loaded = await loadProgress()
+      if (cancelled) return
+      setProgress(loaded)
+      progressRef.current = loaded
+      // Migrating browser-only data into the project file on first successful load
+      const result = await saveProgress(loaded)
+      if (!cancelled) {
+        setFileSync({ ok: result.ok, saving: false })
+        setReady(true)
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
   }, [])
+
+  const persist = useCallback((next) => {
+    if (saveTimer.current) clearTimeout(saveTimer.current)
+    setFileSync((s) => ({ ...s, saving: true }))
+    saveTimer.current = setTimeout(async () => {
+      const result = await saveProgress(next)
+      setFileSync({ ok: result.ok, saving: false })
+    }, 280)
+  }, [])
+
+  const commit = useCallback(
+    (next) => {
+      setProgress(next)
+      progressRef.current = next
+      persist(next)
+    },
+    [persist],
+  )
 
   const isDone = useCallback(
     (lessonId) => Boolean(progress.lessons[lessonId]?.done),
@@ -84,7 +120,6 @@ export function ProgressProvider({ children }) {
     [commit],
   )
 
-  /** Flip difficulty only (keeps existing note). */
   const setDifficulty = useCallback(
     (lessonId, difficulty) => {
       const prev = progressRef.current.lessons[lessonId]
@@ -177,7 +212,6 @@ export function ProgressProvider({ children }) {
     recent: [],
   }
 
-  // localStorage assessment wins if newer; else default from assessment.js
   const assessment = useMemo(() => {
     const local = progress.assessment
     if (!local) return DEFAULT_ASSESSMENT
@@ -189,6 +223,8 @@ export function ProgressProvider({ children }) {
   const value = useMemo(
     () => ({
       progress,
+      ready,
+      fileSync,
       isDone,
       setDone,
       getDifficulty,
@@ -207,6 +243,8 @@ export function ProgressProvider({ children }) {
     }),
     [
       progress,
+      ready,
+      fileSync,
       isDone,
       setDone,
       getDifficulty,

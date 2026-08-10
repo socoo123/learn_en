@@ -12,8 +12,9 @@
 - **目标**：把「能看懂」提升到「能用出来」；中期瞄准稳 **B2**（约 4～8 个月，每天有效学习 ~2 小时）。
 - **界面偏好**：浅色主题、高对比、科技感（电光蓝、等宽标签）。
 - **练法习惯**：尚雯婕精听——**每一分钟材料投入超过 1 小时**（精听→跟读→复述）。
+- **难度节奏**：循序渐进；用户觉得太简单时会明确要求「多加点句子 / 加难」——再加长或提高密度，不要擅自猛抬难度。
 
-选词与选材偏向：**会议 / 邮件 / 跨文化 / 短语动词 / 地道表达**，不是考试词。
+选词与选材偏向：**软件开发 IT（教程 / 技术文 / 论文导读）+ 职场场景英语（活动邮件、调查表、日常商务交流）**；会议 / 邮件 / 跨文化 / 短语动词 / 地道表达优先，不是考试词。
 
 ---
 
@@ -38,20 +39,21 @@
 
 用户说「生成今日阅读」时：
 
-1. 从选题池**随机抽一类**（见下），约 400–700 词、预计 2–5 分钟。
-2. 追加 `kind:"reading"` + `stats: { words, newWords, minutes }`。
+1. **加权选题**（见下），约 **400 词**（±50）、预计 3–5 分钟；难度锚定 **`2026-08-08-reading`（Nadella 篇）**：句式清楚、可复用块多、少堆俚语/哲理——用户明确说「按这一篇水平刚刚好，能力提升前不要自行拔高」。
+2. 追加 `kind:"reading"` + `stats: { words, newWords, minutes }`；vocab 宜偏多（技术词 + 职场块都标）。
 3. 完整 vocab + quiz；文末有难度反馈 UI。
 4. **三月清理**：删掉早于「当前月 − 3」的 reading；shadow **不删**。
 
-选题池：① IT/数码 ② 商务英语 ③ 生活常识 ④ 运动比赛 ⑤ 经济 ⑥ 名人采访/演讲/推特风 ⑦ 名著短摘。
+**选题权重（2026-08-09 起）**：约 **60% IT/软件开发**（教程、工程实践文、论文/RFC 导读改写——为日后直接读论文铺路）+ **30% 职场场景英语**（活动邀请邮件、调查表/问卷文案、日常商务往来、会议跟进）+ **10%** 其余池（生活 / 体育 / 经济 / 名人·推特 / 名著）。均匀随机七类已废弃。
 
 ### C. 难度反馈 → 调选材 + 更新评估
 
-- 文末：好读 / 刚好 / 难读 + **文字备注** → 存 localStorage。
-- 用户点「复制近期反馈」并说「今天的反馈你看看」→ 读备注与难度，然后：
+- 文末：好读 / 刚好 / 难读 + 文字备注 → 写入 **`data/learner-progress.json`**（dev 自动保存）。
+- 用户说「今天的反馈你看看」→ **打开并阅读** `data/learner-progress.json` 的 `feedback.reading`，然后：
   1. 调整后续阅读难度/类别
-  2. 更新 `src/data/assessment.js`（含 `cefr`: A1|A2|B1|B1+|B2|C1|C2）
-- 难读偏多 → 降难度；好读偏多 → 升难度；结合备注里的主题偏好。
+  2. 更新 `src/data/assessment.js`（含 `cefr`）
+- 难读偏多 → 降难度；好读偏多 → 升难度；结合备注主题偏好。
+- 换电脑：`git pull` 该 JSON 即带回进度；学完记得 `git add data/learner-progress.json && commit/push`。
 
 ### D. 补生词（真实盲区）
 
@@ -80,13 +82,11 @@
 ## 四、技术备忘
 
 - 启动：`npm run dev` → http://127.0.0.1:5850 ；构建：`npm run build`。
-- 数据：`lessons.js`（合并 shadow 模块 + reading）· `series.js` · `assessment.js` · `cefr-levels.js` · `shadow/*.js`。
-- **URL 路由**（浏览器前进/后退可用）：
-  - `/` 首页
-  - `/lesson/:id` 课时（如 `/lesson/2026-08-06-reading`）
-  - `/series/:id` 系列分析
-  - `/assessment` 个人评估
-- localStorage：`en_reader_v2`（theme/zhMode）· `en_reader_progress` v2（done / difficulty / note / feedback）。
-- 上下课只在同一 `kind` 内切换，并更新 URL。
-- 选择题 `answer` 可以是**选项下标**（推荐）或选项原文；`Quiz.jsx` 两种都认。
-- 细则：**`PLAN.md`**。用户向导：**`README.md`**。
+- 数据：`lessons.js` · `series.js` · `assessment.js` · `cefr-levels.js` · `shadow/*.js`。
+- **学习进度真源**：[`data/learner-progress.json`](data/learner-progress.json)（勾选、难度、备注、反馈）。
+  - `npm run dev` 时经 `/api/progress` 自动读写；换电脑：`git pull` 即带进度。
+  - 用户说「今天的反馈你看看」→ **直接读该 JSON**，不必等粘贴（仍可复制作备份）。
+  - 同时写一份 localStorage 缓存；主题仍只存 `en_reader_v2`。
+- **URL**：`/` · `/lesson/:id` · `/series/:id` · `/assessment`
+- 选择题 `answer`：下标或选项原文均可。
+- 细则：`PLAN.md`。用户向导：`README.md`。

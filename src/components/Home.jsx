@@ -104,6 +104,7 @@ export default function Home({
     seriesStats,
     exportProgress,
     importFromFile,
+    fileSync,
   } = useProgress()
   const [query, setQuery] = useState('')
   const fileRef = useRef(null)
@@ -527,7 +528,14 @@ export default function Home({
         )}
 
         <footer className="home-foot">
-          精听 {shadowLessons.length} 份 · 阅读 {readingOnly.length} 篇（近三月）· 最新在上
+          精听 {shadowLessons.length} 份 · 阅读 {readingOnly.length} 篇（近三月）
+          {fileSync.saving
+            ? ' · 进度写入中…'
+            : fileSync.ok === true
+              ? ' · 已同步到 data/learner-progress.json'
+              : fileSync.ok === false
+                ? ' · 进度仅本地缓存（请用 npm run dev）'
+                : ''}
         </footer>
       </div>
     </main>

@@ -79,7 +79,8 @@ export default function DifficultySurvey({ lessonId }) {
           )}
         </div>
         <p className="difficulty-hint">
-          提交后可回首页点「复制近期反馈」，对我说「今天的反馈你看看」，我会据此调选材并更新水平评估。
+          提交后进度会写入项目文件 <code>data/learner-progress.json</code>
+          （需 <code>npm run dev</code>）。对我说「今天的反馈你看看」，我可以直接读这个文件。
         </p>
       </form>
     </section>

@@ -1,5 +1,6 @@
 export const STORAGE_KEY = 'en_reader_progress'
 export const PROGRESS_VERSION = 2
+export const PROGRESS_API = '/api/progress'
 
 const EMPTY_READING_FEEDBACK = () => ({
   easy: 0,
@@ -95,9 +96,10 @@ export function mergeProgress(a, b) {
     const pa = lessons[key]
     lessons[key] = pa ? mergeLessonEntry(pa, pb) : pb
   }
-  const updatedAt = Object.values(lessons).reduce(
-    (max, p) => Math.max(max, Date.parse(p.updatedAt) || 0),
-    Math.max(Date.parse(aa.updatedAt) || 0, Date.parse(bb.updatedAt) || 0),
+  const updatedAt = Math.max(
+    Date.parse(aa.updatedAt) || 0,
+    Date.parse(bb.updatedAt) || 0,
+    ...Object.values(lessons).map((p) => Date.parse(p.updatedAt) || 0),
   )
   return {
     version: PROGRESS_VERSION,
@@ -113,29 +115,86 @@ export function mergeProgress(a, b) {
   }
 }
 
-export function loadProgress() {
+export function loadProgressFromLocalStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return emptyProgressFile()
+    if (!raw) return null
     const data = JSON.parse(raw)
     if (
       (data.version !== 1 && data.version !== 2) ||
       typeof data.lessons !== 'object' ||
       !data.lessons
     ) {
-      return emptyProgressFile()
+      return null
     }
     return migrateProgress(data)
   } catch {
-    return emptyProgressFile()
+    return null
   }
 }
 
-export function saveProgress(file) {
+/** Sync cache only — real source of truth is the project file via API. */
+export function saveProgressLocal(file) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(migrateProgress(file)))
   } catch {
-    // quota / private mode — ignore
+    // ignore
+  }
+}
+
+export async function fetchProgressFromFile() {
+  try {
+    const res = await fetch(PROGRESS_API, { cache: 'no-store' })
+    if (!res.ok) return null
+    const data = await res.json()
+    if (typeof data?.lessons !== 'object') return null
+    return migrateProgress(data)
+  } catch {
+    return null
+  }
+}
+
+export async function writeProgressToFile(file) {
+  const payload = migrateProgress(file)
+  const res = await fetch(PROGRESS_API, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw new Error(text || `progress API ${res.status}`)
+  }
+  return payload
+}
+
+/**
+ * Load order: project file ↔ localStorage merge (last-write-wins per lesson).
+ * If only browser has data, merge onto empty file shape so first save migrates it into the repo.
+ */
+export async function loadProgress() {
+  const fromFile = await fetchProgressFromFile()
+  const fromLs = loadProgressFromLocalStorage()
+
+  if (fromFile && fromLs) {
+    const merged = mergeProgress(fromFile, fromLs)
+    return merged
+  }
+  if (fromFile) return fromFile
+  if (fromLs) return fromLs
+  return emptyProgressFile()
+}
+
+/** Persist: localStorage cache + project file (when API available). */
+export async function saveProgress(file) {
+  const next = migrateProgress(file)
+  saveProgressLocal(next)
+  try {
+    await writeProgressToFile(next)
+    return { ok: true, file: true }
+  } catch (err) {
+    console.warn('[progress] file save failed (dev server API required)', err)
+    return { ok: false, file: false, error: err }
   }
 }
 
@@ -146,7 +205,7 @@ export function downloadProgress(file) {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'en-progress.json'
+  a.download = 'learner-progress.json'
   a.click()
   URL.revokeObjectURL(url)
 }
@@ -163,10 +222,6 @@ export function parseImportedProgress(raw) {
   return migrateProgress(data)
 }
 
-/**
- * Submit reading feedback: difficulty required; note optional.
- * difficulty: "easy" | "ok" | "hard" | null (clear feedback for this lesson)
- */
 export function applyReadingFeedback(file, lessonId, { difficulty, note } = {}) {
   const next = migrateProgress(file)
   const updatedAt = new Date().toISOString()
@@ -175,10 +230,7 @@ export function applyReadingFeedback(file, lessonId, { difficulty, note } = {}) 
   const noteText = typeof note === 'string' ? note.trim() : ''
 
   if (!difficulty) {
-    const kept = { ...prev }
-    delete kept.difficulty
-    delete kept.note
-    if (kept.done) {
+    if (prev.done) {
       lessons[lessonId] = { done: true, updatedAt }
     } else {
       delete lessons[lessonId]
@@ -190,8 +242,7 @@ export function applyReadingFeedback(file, lessonId, { difficulty, note } = {}) 
     lessons[lessonId] = entry
   }
 
-  const reading = { ...next.feedback.reading }
-  let recent = (reading.recent || []).filter((r) => r.id !== lessonId)
+  let recent = (next.feedback.reading.recent || []).filter((r) => r.id !== lessonId)
   if (difficulty) {
     recent = [
       {
@@ -219,7 +270,6 @@ export function applyReadingFeedback(file, lessonId, { difficulty, note } = {}) 
   }
 }
 
-/** @deprecated use applyReadingFeedback — kept for callers that only flip difficulty */
 export function applyDifficulty(file, lessonId, difficulty) {
   const prev = migrateProgress(file).lessons[lessonId]
   return applyReadingFeedback(file, lessonId, {
@@ -240,7 +290,6 @@ export function applyAssessment(file, assessment) {
   }
 }
 
-/** Plain-text dump for pasting to Claude. */
 export function formatFeedbackForCopy(file, lessonTitleById = {}) {
   const data = migrateProgress(file)
   const lines = ['# 近期阅读反馈', '']

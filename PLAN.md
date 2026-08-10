@@ -3,7 +3,7 @@
 > **给下次会话的 Agent / 自己**：先读 `CLAUDE.md`，再读本文「现状清单 + 日常任务」。  
 > 本文是当前真实方案与待续工作的单一事实来源（SoT），不是过期草稿。
 
-**最后更新**：2026-08-06
+**最后更新**：2026-08-09
 
 ---
 
@@ -43,11 +43,15 @@
 
 每份精听课带 **`timeRange`**（首页与课文页均展示「视频 mm:ss–mm:ss」）。
 
-### 1.3 反馈与评估
+### 1.3 反馈与评估 · 进度文件
 
-- 阅读文末：好读 / 刚好 / 难读 + 文字备注 →「提交反馈」→ `en_reader_progress`。
-- 评估页可「复制近期反馈」；用户说「今天的反馈你看看」→ 更新 `assessment.js`（含 `cefr`）并调选材。
-- CEFR 说明表：`src/data/cefr-levels.js`（A1 / A2 / B1 / B1+ / B2 / C1 / C2）。
+- **真源**：仓库内 [`data/learner-progress.json`](data/learner-progress.json)（勾选 / 难度 / 备注 / feedback.recent）。
+- `npm run dev` 提供 `GET|PUT /api/progress`（`vite-plugin-progress-api.js`）自动读写该文件。
+- Agent 看反馈：直接读 JSON，不必依赖粘贴（复制按钮仍保留作备份）。
+- 换机：`git pull`；学完后建议 commit 该文件再 push。
+- `assessment.js` 仍由 Agent 维护档位文案；JSON 里也可有 `assessment` 覆盖。
+- CEFR 表：`src/data/cefr-levels.js`。
+- 主题等 UI 偏好仍可放 localStorage（`en_reader_v2`），与学习进度分离。
 
 ### 1.4 关键数据文件
 
@@ -67,9 +71,10 @@ src/data/
 
 ### 2.1 「生成今日阅读」
 
-1. 从选题池随机一类（IT / 商务 / 生活 / 体育 / 经济 / 名人·推特 / 名著）。
-2. 写 `kind:"reading"`，约 400–700 词，`stats` + vocab + quiz。
-3. 看近期反馈调难度；必要时清理 3 个月前的 reading。
+1. **加权选题**：~60% IT/软件开发（教程 · 工程文 · 论文/RFC 导读）+ ~30% 职场场景（活动邮件 · 调查表 · 日常商务交流）+ ~10% 其余。
+2. 写 `kind:"reading"`，约 **400 词**（±50），`stats` + vocab（宜偏多）+ quiz。
+3. **难度锚**：对齐 `2026-08-08-reading`；用户未说加难前不擅自抬抽象度/俚语密度。
+4. 看近期反馈微调；必要时清理 3 个月前的 reading。
 
 ### 2.2 「拆这段精听 / 给了 .srt」
 
@@ -167,7 +172,7 @@ assessment?: 可选覆盖 assessment.js
 ## 6. 已知待续 / 可演进（未做也可先记）
 
 - [ ] 更多精听系列（用户再给字幕时按 §2.2 追加）
-- [ ] 阅读选题按反馈**加权随机**（现在是均匀随机 + 人工调难度）
+- [x] 阅读选题按偏好**加权**（IT/职场为主；见 2.1；难度锚 08-08）
 - [ ] 精听课也可选加「跟读检查」类练习（若用户要求）
 - [ ] README 用户向导与本 PLAN 同步（见 README）
 - [ ] 可选：挂音频/视频链接到 timeRange（用户若需要再做）

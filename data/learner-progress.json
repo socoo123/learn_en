@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-08-10T23:18:45.876Z",
+  "updatedAt": "2026-08-10T23:33:08.966Z",
   "lessons": {
     "2026-07-30": {
       "done": true,
@@ -55,14 +55,26 @@
     "2026-08-06-cook-04": {
       "done": true,
       "updatedAt": "2026-08-10T23:18:45.876Z"
+    },
+    "2026-08-11-reading": {
+      "difficulty": "easy",
+      "updatedAt": "2026-08-10T23:33:08.966Z",
+      "note": "这篇有点太简单，虽然一些生词不清楚，但是你可以提升点难度。",
+      "done": true
     }
   },
   "feedback": {
     "reading": {
-      "easy": 1,
+      "easy": 2,
       "ok": 2,
       "hard": 2,
       "recent": [
+        {
+          "id": "2026-08-11-reading",
+          "difficulty": "easy",
+          "note": "这篇有点太简单，虽然一些生词不清楚，但是你可以提升点难度。",
+          "at": "2026-08-10T23:33:05.522Z"
+        },
         {
           "id": "2026-08-10-reading",
           "difficulty": "ok",

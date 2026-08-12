@@ -841,6 +841,147 @@ export const LESSONS = [
         explain: "Impact helps triage = 影响说明有助于按优先级处理。"
       }
     ]
+  },
+
+  {
+    id: "2026-08-12-reading",
+    date: "2026-08-12",
+    title: "Why your code review comments get ignored",
+    source: "IT / 软件开发 · 评审沟通工程文",
+    tags: ["IT", "协作", "代码评审"],
+    kind: "reading",
+    durationMin: 5,
+    stats: { words: 350, newWords: 20, minutes: 5 },
+
+    passage: [
+      {
+        en: "Most review comments fail not because they are wrong, but because they arrive without context. A reviewer writes \"this looks wrong\" and moves on; the author stares at the line, guesses the intent, and either pushes back defensively or applies a shallow fix that misses the real risk. The comment was technically correct — and practically useless.",
+        zh: "多数评审意见失败，不是因为说错了，而是因为脱离上下文。审阅者丢下一句 \"this looks wrong\" 就走了；作者盯着那行代码猜意图，要么防御性地顶回去，要么做个浅层修补，恰好漏掉真正的风险。这条意见技术上正确——实际上没用。"
+      },
+      {
+        en: "Effective reviewers separate three kinds of feedback that authors often conflate. A blocker says: this will break in production, and here is the failure mode. A suggestion says: there is a cleaner path, and here is the trade-off. A question says: I might be missing something — help me see the constraint you were solving. When you label the kind, you remove the guesswork about how seriously to take it.",
+        zh: "高效的审阅者会区分三类反馈，而作者常常混为一谈。blocker 说：这会在生产上出问题，失效模式如下。suggestion 说：有条更干净的路，取舍如下。question 说：可能是我漏了什么——帮我看看你当时面对的约束。标清类别，就消除了「该多认真对待」的猜测。"
+      },
+      {
+        en: "The strongest comments follow a simple shape: observation, then reasoning, then a concrete next step. \"This query runs inside a loop (observation). With 10k rows it will issue 10k round trips and time out under load (reasoning). Could we batch it into one WHERE IN clause? (next step)\" Notice what is absent: no judgment about the author's skill, no vague discomfort. The author can verify each claim independently instead of trusting your seniority.",
+        zh: "最有力的意见遵循一个简单结构：观察、推理、具体的下一步。\"这个查询在循环里（观察）。一万行数据会产生一万次往返，负载下会超时（推理）。能不能合并成一条 WHERE IN？（下一步）\" 注意缺了什么：没有对作者水平的评判，没有含糊的不安。作者可以独立验证每一条论断，而不是靠你的资历买账。"
+      },
+      {
+        en: "Tone matters more in writing than in speech, because the reader supplies the voice. \"Why would you do it this way?\" reads as an attack even when you meant honest curiosity. Rephrase with the constraint visible: \"I expected this to reuse the existing cache — was there a reason to bypass it?\" You are not being softer; you are being more precise about what you actually want to know.",
+        zh: "书面语气比口头更重要，因为读者会自己脑补声音。\"你为什么要这么做？\" 即使你只是好奇，读起来也像攻击。把约束摆出来重写：\"我以为这里会复用现有缓存——绕开它是有原因的吗？\" 你不是在变软弱，而是在更精确地表达你到底想知道什么。"
+      },
+      {
+        en: "Finally, close the loop. When an author addresses your comment, say so explicitly — \"resolved, thanks\" costs two seconds and ends the thread. When you disagree after their reply, restate the risk rather than repeating the request: repetition reads as stubbornness, while a sharpened risk statement gives the author new material to work with. Reviews are a negotiation about shared ownership, and the goal is not to win the thread but to ship code the whole team can maintain.",
+        zh: "最后，闭环。作者处理完你的意见，就明确说一句——\"resolved, thanks\" 两秒钟，讨论串就此终结。若回复后你仍不同意，重申风险而不是重复要求：重复读起来像固执，而一条更锐利的风险陈述能给作者新的处理材料。评审是一场关于共同所有权的协商，目标不是赢讨论串，而是交付全团队都能维护的代码。"
+      }
+    ],
+
+    core: {
+      words: [
+        { w: "blocker", phon: "/ˈblɒkə/", pos: "n.", def: "阻塞项（不改不能合并的问题）", def_en: "feedback that must be fixed before merging", syn: ["must-fix", "showstopper"], ex_en: "A blocker says: this will break in production.", ex_zh: "blocker 说：这会在生产上出问题。" },
+        { w: "failure mode", phon: "/ˈfeɪljə məʊd/", pos: "n.", def: "失效模式（具体会怎么坏）", def_en: "the specific way a system will break", syn: ["break scenario", "way it fails"], ex_en: "Here is the failure mode.", ex_zh: "失效模式如下。" },
+        { w: "trade-off", phon: "/ˈtreɪd ɒf/", pos: "n.", def: "取舍 / 权衡", def_en: "what you give up to gain something else", syn: ["compromise", "exchange"], ex_en: "Here is the trade-off.", ex_zh: "取舍如下。" },
+        { w: "conflate", phon: "/kənˈfleɪt/", pos: "v.", def: "混为一谈（把不同东西当成一回事）", def_en: "to treat two different things as if they were the same", syn: ["mix up", "lump together"], ex_en: "Authors often conflate the three kinds.", ex_zh: "作者常把三类混为一谈。" },
+        { w: "round trip", phon: "/raʊnd trɪp/", pos: "n.", def: "（网络）往返一次", def_en: "one full request and response across the network", syn: ["network hop", "request cycle"], ex_en: "It will issue 10k round trips.", ex_zh: "会产生一万次往返。" },
+        { w: "close the loop", phon: "/kləʊz ðə luːp/", pos: "v. phr.", def: "闭环（把讨论收尾、确认完成）", def_en: "to confirm a thread is finished so nothing hangs", syn: ["wrap up", "confirm done"], ex_en: "Finally, close the loop.", ex_zh: "最后，闭环。" }
+      ],
+      grammar: [
+        { t: "not because … but because …", d: "先否定表层原因再给出真因：They fail not because they are wrong, but because they arrive without context." },
+        { t: "the + 比较级 … the + 比较级", d: "程度联动：The stronger the claim, the more evidence it needs." }
+      ]
+    },
+
+    vocab: [
+      { w: "push back", phon: "/pʊʃ bæk/", pos: "v. phr.", def: "顶回去 / 表示异议", def_en: "to argue against a suggestion", syn: ["object", "resist", "challenge"], ex_en: "The author pushes back defensively.", ex_zh: "作者防御性地顶回去。" },
+      { w: "shallow fix", phon: "/ˈʃæləʊ fɪks/", pos: "n.", def: "浅层修补（只改表面）", def_en: "a quick patch that misses the root cause", syn: ["surface patch", "band-aid fix"], ex_en: "A shallow fix misses the real risk.", ex_zh: "浅层修补漏掉真正的风险。" },
+      { w: "suggestion", phon: "/səˈdʒestʃən/", pos: "n.", def: "建议（可改可不改）", def_en: "optional feedback the author may take or leave", syn: ["optional idea", "nice-to-have"], ex_en: "A suggestion offers a cleaner path.", ex_zh: "suggestion 给出更干净的路。" },
+      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件（当时面对的限制）", def_en: "a limit the author was working within", syn: ["limit", "restriction"], ex_en: "Help me see the constraint you were solving.", ex_zh: "帮我看看你当时面对的约束。" },
+      { w: "guesswork", phon: "/ˈɡeswɜːk/", pos: "n.", def: "猜测 / 瞎猜", def_en: "deciding by guessing instead of facts", syn: ["guessing", "speculation"], ex_en: "You remove the guesswork.", ex_zh: "消除了猜测。" },
+      { w: "observation", phon: "/ˌɒbzəˈveɪʃn/", pos: "n.", def: "观察（客观看到的事实）", def_en: "a neutral fact you can point to", syn: ["finding", "what you see"], ex_en: "Start with observation, then reasoning.", ex_zh: "先观察，再推理。" },
+      { w: "reasoning", phon: "/ˈriːzənɪŋ/", pos: "n.", def: "推理（为什么这是问题）", def_en: "the logic that connects a fact to a risk", syn: ["logic", "rationale"], ex_en: "Then add your reasoning.", ex_zh: "再加上你的推理。" },
+      { w: "batch", phon: "/bætʃ/", pos: "v./n.", def: "批处理（合并成一批）", def_en: "to group many small operations into one", syn: ["group", "bundle"], ex_en: "Batch it into one WHERE IN clause.", ex_zh: "合并成一条 WHERE IN。" },
+      { w: "time out", phon: "/taɪm aʊt/", pos: "v. phr.", def: "超时", def_en: "to fail because it took too long", syn: ["exceed the limit", "expire"], ex_en: "It will time out under load.", ex_zh: "负载下会超时。" },
+      { w: "verify", phon: "/ˈverɪfaɪ/", pos: "v.", def: "验证（独立确认真假）", def_en: "to check something yourself to confirm it", syn: ["check", "confirm", "validate"], ex_en: "The author can verify each claim.", ex_zh: "作者可独立验证每条论断。" },
+      { w: "seniority", phon: "/ˌsiːniˈɒrəti/", pos: "n.", def: "资历（职位年资带来的权威）", def_en: "authority that comes from years in a role", syn: ["rank", "experience level"], ex_en: "Instead of trusting your seniority.", ex_zh: "而不是靠你的资历买账。" },
+      { w: "supply the voice", phon: "/səˈplaɪ ðə vɔɪs/", pos: "v. phr.", def: "（读者）脑补语气", def_en: "the reader imagines your tone when reading text", syn: ["imagine the tone", "hear it in their head"], ex_en: "The reader supplies the voice.", ex_zh: "读者会自己脑补声音。" },
+      { w: "bypass", phon: "/ˈbaɪpɑːs/", pos: "v.", def: "绕过（不走某环节）", def_en: "to go around something instead of through it", syn: ["skip", "go around", "circumvent"], ex_en: "Was there a reason to bypass it?", ex_zh: "绕开它是有原因的吗？" },
+      { w: "address a comment", phon: "/əˈdres ə ˈkɒment/", pos: "v. phr.", def: "处理某条评审意见", def_en: "to respond to and resolve a review comment", syn: ["resolve", "handle", "act on"], ex_en: "When an author addresses your comment.", ex_zh: "当作者处理完你的意见。" },
+      { w: "restate", phon: "/ˌriːˈsteɪt/", pos: "v.", def: "重申（换种方式再说）", def_en: "to say again in clearer or sharper words", syn: ["rephrase", "say again"], ex_en: "Restate the risk rather than repeating.", ex_zh: "重申风险而不是重复要求。" },
+      { w: "stubbornness", phon: "/ˈstʌbənəs/", pos: "n.", def: "固执 / 顽固", def_en: "refusing to move even when given reasons", syn: ["obstinacy", "digging in"], ex_en: "Repetition reads as stubbornness.", ex_zh: "重复读起来像固执。" },
+      { w: "negotiation", phon: "/nɪˌɡəʊʃiˈeɪʃn/", pos: "n.", def: "协商 / 谈判", def_en: "a discussion where both sides adjust", syn: ["give-and-take", "discussion"], ex_en: "Reviews are a negotiation about shared ownership.", ex_zh: "评审是关于共同所有权的协商。" },
+      { w: "shared ownership", phon: "/ʃeəd ˈəʊnəʃɪp/", pos: "n.", def: "共同所有权（代码归全团队）", def_en: "the idea that the whole team owns the code", syn: ["collective ownership", "team-owned code"], ex_en: "A negotiation about shared ownership.", ex_zh: "关于共同所有权的协商。" },
+      { w: "maintain", phon: "/meɪnˈteɪn/", pos: "v.", def: "维护（长期改动与修复）", def_en: "to keep code working and changeable over time", syn: ["keep up", "support", "look after"], ex_en: "Code the whole team can maintain.", ex_zh: "全团队都能维护的代码。" },
+      { w: "win the thread", phon: "/wɪn ðə θred/", pos: "v. phr.", def: "赢下讨论串（争赢而非解决问题）", def_en: "to treat the discussion as a contest to win", syn: ["win the argument", "come out on top"], ex_en: "The goal is not to win the thread.", ex_zh: "目标不是赢讨论串。" }
+    ],
+
+    grammar: [
+      {
+        t: "not because … but because …",
+        pattern: "X happens not because A, but because B.",
+        rule: "先否定人们以为的原因，再给出真正的原因，论证更有力。",
+        examples: [
+          { en: "Comments fail not because they are wrong, but because they lack context.", zh: "意见失败不是因为错，而是缺上下文。" },
+          { en: "You are not being softer; you are being more precise.", zh: "你不是在变软弱，而是更精确。" }
+        ]
+      },
+      {
+        t: "祈使 + 引号示例",
+        pattern: "Rephrase with …: \"…\"",
+        rule: "给出改写示范时，先给方法再给可直接抄的原句。",
+        examples: [
+          { en: "Rephrase with the constraint visible: \"Was there a reason to bypass it?\"", zh: "把约束摆出来重写：「绕开它是有原因的吗？」" }
+        ]
+      }
+    ],
+
+    quiz: [
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者认为评审意见失败的真正原因是什么？",
+        options: [
+          "意见本身技术上就是错的",
+          "意见脱离上下文，作者只能猜意图",
+          "作者水平太低看不懂",
+          "评审工具太难用"
+        ],
+        answer: 1,
+        explain: "Most review comments fail not because they are wrong, but because they arrive without context."
+      },
+      {
+        type: "fill",
+        tag: "语言点",
+        q: "The strongest comments follow a simple shape: observation, then ____, then a concrete next step.",
+        answer: "reasoning",
+        explain: "原文结构：observation → reasoning → next step。"
+      },
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者建议如何处理「不同意作者的回复」？",
+        options: [
+          "重复原来的要求直到对方照做",
+          "直接用自己的资历压过去",
+          "重申风险而不是重复要求",
+          "放弃并假装同意"
+        ],
+        answer: 2,
+        explain: "Restate the risk rather than repeating the request."
+      },
+      {
+        type: "choice",
+        tag: "语言点",
+        q: "文中 \"close the loop\" 最接近的意思是？",
+        options: [
+          "关闭代码仓库",
+          "确认讨论收尾、不留悬而未决",
+          "绕开评审直接合并",
+          "删除所有评论"
+        ],
+        answer: 1,
+        explain: "Close the loop = 闭环，确认处理完毕、结束讨论串。"
+      }
+    ]
   }
 
 ]

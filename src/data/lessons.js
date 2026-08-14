@@ -982,6 +982,146 @@ export const LESSONS = [
         explain: "Close the loop = 闭环，确认处理完毕、结束讨论串。"
       }
     ]
+  },
+
+  {
+    id: "2026-08-14-reading",
+    date: "2026-08-14",
+    title: "Write a design doc people will actually read",
+    source: "IT / 软件开发 · 设计文档短教程",
+    tags: ["IT", "设计文档", "协作"],
+    kind: "reading",
+    durationMin: 4,
+    stats: { words: 405, newWords: 20, minutes: 4 },
+
+    passage: [
+      {
+        en: "A design doc is not a novel. It is a decision tool for busy people who must approve or challenge your plan. If the first screen is a wall of background, reviewers skim, miss the trade-offs, and later reopen every debate in the meeting. Start with the decision you need: what you propose, what you are asking for, and by when. Context comes second — only enough for a stranger on the team to follow. Link to tickets or dashboards if you must, but do not paste their full history into the doc.",
+        zh: "设计文档不是小说。它是给忙碌的人用的决策工具：他们要批准或质疑你的方案。若第一屏全是背景墙，审阅者会扫一眼、错过取舍，随后在会上把每场辩论再开一遍。先写你需要的决定：提议什么、想要什么批准、什么时候前。背景放第二——只够团队里的陌生人跟得上即可。必要时链到工单或看板，但别把完整历史贴进文档。"
+      },
+      {
+        en: "Open with a short problem statement that names the user pain and the current cost. \"Checkout retries spike under load; support spends six hours a week on false failures\" is clearer than \"We should improve reliability.\" Then state the goal and the non-goals in two tight lists. Non-goals protect scope: they tell reviewers what you will not solve in this change, so the discussion stays on the real proposal. If a stakeholder keeps pulling new wishes in, point back to the non-goals list instead of arguing from memory.",
+        zh: "用简短问题陈述开场，点出用户痛点和当前成本。\"负载下结账重试飙升；支持每周花六小时处理误报失败\" 比 \"我们应该提升可靠性\" 更清楚。再用两份紧凑清单写目标和非目标。非目标是护栏：告诉审阅者这次改动不解决什么，讨论才能停在真正的提案上。若干系人不断塞进新愿望，指回非目标清单，而不是凭记忆争论。"
+      },
+      {
+        en: "The heart of the doc is options and trade-offs. Present at least two paths, including \"do nothing\" when that is honest. For each option, cover impact on latency, complexity, rollout risk, and who owns the follow-up work. Prefer a table or bullets over long paragraphs. When you recommend one path, say why in one paragraph — not because it is elegant, but because it best matches the constraint you named earlier. Call out what you would revisit later so people do not treat the choice as permanent dogma.",
+        zh: "文档的核心是方案与取舍。至少摆两条路径，诚实时也要包括「什么都不做」。每个方案写清对延迟、复杂度、发布风险的影响，以及后续工作归谁。优先用表格或要点，少写长段。推荐某一条时，用一段话说明原因——不是因为它优雅，而是因为它最贴合你前面点名的约束。写明以后会重看什么，避免大家把这次选择当成永久教条。"
+      },
+      {
+        en: "Add a rollout and rollback plan before people ask. How will you ship behind a flag? What metric proves success in the first week? If the change misbehaves, how do you disable it without a hot fix scramble? Reviewers trust docs that assume failure modes. End with open questions and a clear ask: \"Need approval on Option B by Thursday so we can start the spike.\" Put the ask in bold or at the top if your template allows — buried asks get soft yes answers that never become owners.",
+        zh: "在别人追问之前就写上发布与回滚计划。如何用 flag 灰度？第一周用什么指标证明成功？若表现异常，如何在不做热修救场的情况下关掉？假设了失效模式的文档更让人信任。结尾写未决问题和清晰请求：\"周四前需要批准方案 B，以便我们开始 spike。\" 若模板允许，把请求加粗或放在顶部——埋起来的请求只会换来永远没有负责人的含糊同意。"
+      },
+      {
+        en: "In English meetings, reuse these labels: Problem, Goals / Non-goals, Options, Recommendation, Rollout, Open questions. They travel well across time zones and reduce status theater. A sharp design doc does not remove disagreement — it makes disagreement cheap, because everyone argues from the same page.",
+        zh: "英文会议里可复用这些小标题：Problem、Goals / Non-goals、Options、Recommendation、Rollout、Open questions。它们跨时区也好用，还能减少走过场式的状态汇报。锋利的设计文档不会消灭分歧——它让分歧变便宜，因为大家都在同一页上争论。"
+      }
+    ],
+
+    core: {
+      words: [
+        { w: "design doc", phon: "/dɪˈzaɪn dɒk/", pos: "n.", def: "设计文档（技术方案说明）", def_en: "a short write-up of a technical plan for review", syn: ["tech proposal", "design write-up"], ex_en: "A design doc is a decision tool.", ex_zh: "设计文档是决策工具。" },
+        { w: "trade-off", phon: "/ˈtreɪd ɒf/", pos: "n.", def: "取舍 / 权衡", def_en: "what you give up to gain something else", syn: ["compromise", "exchange"], ex_en: "They miss the trade-offs.", ex_zh: "他们错过了取舍。" },
+        { w: "non-goal", phon: "/nɒn ɡəʊl/", pos: "n.", def: "非目标（明确不做的事）", def_en: "something you choose not to solve in this work", syn: ["out of scope", "not in this change"], ex_en: "State the goal and the non-goals.", ex_zh: "写清目标和非目标。" },
+        { w: "rollout", phon: "/ˈrəʊlaʊt/", pos: "n.", def: "灰度发布 / 逐步上线", def_en: "the plan for shipping a change in stages", syn: ["release plan", "gradual ship"], ex_en: "Add a rollout and rollback plan.", ex_zh: "写上发布与回滚计划。" },
+        { w: "rollback", phon: "/ˈrəʊlbæk/", pos: "n.", def: "回滚（出问题后撤回改动）", def_en: "returning to the previous safe version", syn: ["revert plan", "undo the change"], ex_en: "How do you roll back safely?", ex_zh: "如何安全回滚？" },
+        { w: "open question", phon: "/ˈəʊpən ˈkwestʃən/", pos: "n.", def: "未决问题（仍需讨论）", def_en: "a point that still needs a decision or answer", syn: ["unresolved item", "pending question"], ex_en: "End with open questions and a clear ask.", ex_zh: "结尾写未决问题和清晰请求。" }
+      ],
+      grammar: [
+        { t: "not A. It is B.", d: "先否定误解再给定义：A design doc is not a novel. It is a decision tool." },
+        { t: "so + 目的/结果", d: "说明请求的目的：Need approval by Thursday so we can start the spike." }
+      ]
+    },
+
+    vocab: [
+      { w: "approve", phon: "/əˈpruːv/", pos: "v.", def: "批准", def_en: "to officially say yes to a plan", syn: ["sign off", "green-light"], ex_en: "People who must approve your plan.", ex_zh: "必须批准你方案的人。" },
+      { w: "challenge", phon: "/ˈtʃælɪndʒ/", pos: "v.", def: "质疑 / 挑战（提出不同看法）", def_en: "to question a plan and ask for proof", syn: ["push back on", "question"], ex_en: "Approve or challenge your plan.", ex_zh: "批准或质疑你的方案。" },
+      { w: "wall of background", phon: "/wɔːl əv ˈbækɡraʊnd/", pos: "n. phr.", def: "背景墙（大段铺垫）", def_en: "too much setup text before the real point", syn: ["long preamble", "heavy intro"], ex_en: "The first screen is a wall of background.", ex_zh: "第一屏全是背景墙。" },
+      { w: "problem statement", phon: "/ˈprɒbləm ˈsteɪtmənt/", pos: "n.", def: "问题陈述", def_en: "a short clear description of what is wrong", syn: ["issue summary", "pain statement"], ex_en: "Open with a short problem statement.", ex_zh: "用简短问题陈述开场。" },
+      { w: "spike", phon: "/spaɪk/", pos: "n./v.", def: "（指标）飙升；也指短时技术探路", def_en: "a sharp rise; also a short research task", syn: ["surge", "exploration task"], ex_en: "Checkout retries spike under load.", ex_zh: "负载下结账重试飙升。" },
+      { w: "false failure", phon: "/fɔːls ˈfeɪljə/", pos: "n.", def: "误报失败（其实未必真坏）", def_en: "an alert or error that is not a real user-facing break", syn: ["false alarm", "noisy failure"], ex_en: "Six hours on false failures.", ex_zh: "六小时处理误报失败。" },
+      { w: "scope", phon: "/skəʊp/", pos: "n.", def: "范围（做什么/不做什么）", def_en: "what is included in the work — and what is not", syn: ["boundaries", "coverage"], ex_en: "Non-goals protect scope.", ex_zh: "非目标护住范围。" },
+      { w: "latency", phon: "/ˈleɪtənsi/", pos: "n.", def: "延迟（响应快慢）", def_en: "how long a request takes to finish", syn: ["response time", "delay"], ex_en: "Impact on latency and complexity.", ex_zh: "对延迟和复杂度的影响。" },
+      { w: "complexity", phon: "/kəmˈpleksəti/", pos: "n.", def: "复杂度", def_en: "how hard the system is to build and maintain", syn: ["intricacy", "how hard it is"], ex_en: "Cover complexity and rollout risk.", ex_zh: "写清复杂度和发布风险。" },
+      { w: "follow-up work", phon: "/ˈfɒləʊ ʌp wɜːk/", pos: "n.", def: "后续工作", def_en: "tasks that must happen after the first change", syn: ["next steps", "remaining work"], ex_en: "Who owns the follow-up work?", ex_zh: "后续工作归谁？" },
+      { w: "constraint", phon: "/kənˈstreɪnt/", pos: "n.", def: "约束条件", def_en: "a limit you must respect when choosing", syn: ["limit", "restriction"], ex_en: "It matches the constraint you named.", ex_zh: "它贴合你点名的约束。" },
+      { w: "feature flag", phon: "/ˈfiːtʃə flæɡ/", pos: "n.", def: "功能开关", def_en: "a switch that turns a change on or off in production", syn: ["feature toggle", "kill switch"], ex_en: "Ship behind a flag.", ex_zh: "用 flag 灰度发布。" },
+      { w: "metric", phon: "/ˈmetrɪk/", pos: "n.", def: "指标", def_en: "a number you track to judge success", syn: ["measure", "KPI"], ex_en: "What metric proves success?", ex_zh: "什么指标证明成功？" },
+      { w: "misbehave", phon: "/ˌmɪsbɪˈheɪv/", pos: "v.", def: "表现异常 / 出问题", def_en: "to act wrongly or fail in unexpected ways", syn: ["act up", "go wrong"], ex_en: "If the change misbehaves…", ex_zh: "若改动表现异常……" },
+      { w: "hot fix", phon: "/hɒt fɪks/", pos: "n.", def: "热修复（紧急线上补丁）", def_en: "an urgent patch shipped to fix production fast", syn: ["emergency patch", "hotfix"], ex_en: "Without a hot fix scramble.", ex_zh: "不做热修救场。" },
+      { w: "scramble", phon: "/ˈskræmbl/", pos: "n./v.", def: "手忙脚乱的紧急处理", def_en: "a rushed, messy rush to fix something", syn: ["rush", "fire drill"], ex_en: "A hot fix scramble.", ex_zh: "热修救场式忙乱。" },
+      { w: "failure mode", phon: "/ˈfeɪljə məʊd/", pos: "n.", def: "失效模式", def_en: "the specific way something can break", syn: ["break scenario", "how it fails"], ex_en: "Docs that assume failure modes.", ex_zh: "假设了失效模式的文档。" },
+      { w: "clear ask", phon: "/klɪə ɑːsk/", pos: "n.", def: "清晰请求（明确要什么）", def_en: "a direct statement of what you need from others", syn: ["explicit request", "direct ask"], ex_en: "End with a clear ask.", ex_zh: "以清晰请求收尾。" },
+      { w: "status theater", phon: "/ˈsteɪtəs ˈθɪətə/", pos: "n.", def: "走过场式状态汇报", def_en: "updates that look busy but do not help decisions", syn: ["empty status", "performative update"], ex_en: "Reduce status theater.", ex_zh: "减少走过场式汇报。" },
+      { w: "from the same page", phon: "/frəm ðə seɪm peɪdʒ/", pos: "phr.", def: "基于同一页信息讨论", def_en: "everyone using the same shared facts", syn: ["aligned on facts", "shared context"], ex_en: "Everyone argues from the same page.", ex_zh: "大家都在同一页上争论。" }
+    ],
+
+    grammar: [
+      {
+        t: "not A. It is B.",
+        pattern: "X is not A. It is B.",
+        rule: "先否定常见误解，再给出正确定义，适合开篇定调。",
+        examples: [
+          { en: "A design doc is not a novel. It is a decision tool.", zh: "设计文档不是小说，而是决策工具。" }
+        ]
+      },
+      {
+        t: "so + 目的",
+        pattern: "Need … by … so we can …",
+        rule: "提请求时用 so 接目的，让审批人知道为什么赶这个时间点。",
+        examples: [
+          { en: "Need approval on Option B by Thursday so we can start the spike.", zh: "周四前需要批准方案 B，以便开始探路。" }
+        ]
+      }
+    ],
+
+    quiz: [
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者认为设计文档开头最该先写什么？",
+        options: [
+          "尽量长的历史背景",
+          "你需要的决定：提议、请求、截止时间",
+          "完整的代码附录",
+          "团队每个人的简历"
+        ],
+        answer: 1,
+        explain: "Start with the decision you need: what you propose, what you are asking for, and by when."
+      },
+      {
+        type: "fill",
+        tag: "语言点",
+        q: "Then state the goal and the ____ in two tight lists.",
+        answer: "non-goals",
+        explain: "原文：goal and the non-goals（目标与非目标）。"
+      },
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "为什么文档里要写 rollout 和 rollback？",
+        options: [
+          "为了让文档看起来更长",
+          "审阅者信任会假设失效模式、并说明如何灰度与关掉的方案",
+          "这样就不需要写问题陈述",
+          "这样可以跳过取舍讨论"
+        ],
+        answer: 1,
+        explain: "Reviewers trust docs that assume failure modes."
+      },
+      {
+        type: "choice",
+        tag: "语言点",
+        q: "文中 \"status theater\" 最接近的意思是？",
+        options: [
+          "去剧院看演出",
+          "看起来忙、却帮不上决策的走过场汇报",
+          "正式的发布仪式",
+          "代码评审工具名称"
+        ],
+        answer: 1,
+        explain: "Status theater = 走过场式状态汇报。"
+      }
+    ]
   }
 
 ]

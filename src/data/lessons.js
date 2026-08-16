@@ -1122,6 +1122,139 @@ export const LESSONS = [
         explain: "Status theater = 走过场式状态汇报。"
       }
     ]
+  },
+
+  {
+    id: "2026-08-17-reading",
+    date: "2026-08-17",
+    title: "Leave an on-call handoff the next person trusts",
+    source: "IT / 软件开发 · 值班交接短教程",
+    tags: ["IT", "值班", "协作"],
+    kind: "reading",
+    durationMin: 4,
+    stats: { words: 375, newWords: 17, minutes: 4 },
+
+    passage: [
+      {
+        en: "On-call handoff is not a diary of every ping you saw. It is a short map for the next engineer: what is still risky, what you already checked, and what action they should take if the same alert fires again. If you only write \"quiet night,\" the next person starts from zero when traffic spikes at 9 a.m. Busy teams need continuity more than they need perfect prose. Five honest lines beat a long story that hides the real risk. Write for a tired reader who has two minutes before the first standup.",
+        zh: "值班交接不是把你看到的每条 ping 写成日记。它是给下一位工程师的短地图：还有什么风险、你已经查过什么、同一告警再响时该怎么做。如果只写 \"quiet night\"，早高峰流量一上来，下一个人等于从零开始。忙碌的团队更需要连续性，而不是完美文笔。五句诚实的话，胜过一篇把真风险藏起来的长故事。写给一个站会前只剩两分钟、已经很累的读者。"
+      },
+      {
+        en: "Start with open incidents and near misses. One line each: current state, owner, and next check time. Example: \"Payment latency elevated since 02:10; watching p95; will page if it stays above 800ms for 10 minutes.\" Then list recent deploys or config changes in the last 24 hours, even if they look unrelated. Many night pages are delayed side effects, not random bad luck. If a change was rolled back, say so — the next person should not rediscover that history under pressure. Include timezone and service names so a global teammate does not guess which region you mean.",
+        zh: "先写未关闭事故和险些出事的情况。每条一行：当前状态、负责人、下次检查时间。例如：\"支付延迟自 02:10 升高；盯着 p95；若持续 10 分钟高于 800ms 再 page。\" 再列出过去 24 小时的发版或配置变更，哪怕看起来无关。很多夜间告警是延迟副作用，不是随机倒霉。若某次改动已回滚，也要写明——别让下一个人在压力下重新发现这段历史。写上时区和业务名，全球同事就不用猜你指的是哪个区域。"
+      },
+      {
+        en: "Write runbook links beside the alerts that actually mattered. Do not dump the whole wiki. Say what you tried and what you ruled out: \"Checked DB CPU — normal; restarted consumer — no change; suspect upstream timeout.\" That short trail stops the next person from repeating the same steps at 3 a.m. If a playbook is missing or wrong, note the gap so it can be fixed after the shift. Small fixes to runbooks are how on-call gets quieter over months, not overnight. Prefer facts and timestamps over adjectives like \"weird\" or \"bad.\"",
+        zh: "在真正重要的告警旁写上 runbook 链接。不要把整个 wiki 倒进去。写明你试过什么、排除了什么：\"查过数据库 CPU——正常；重启过 consumer——无变化；怀疑上游超时。\" 这条短轨迹能阻止下一个人凌晨三点重复同样步骤。若 playbook 缺失或有误，记下缺口，班后好修。runbook 的小修补，能让值班在几个月里渐渐安静，而不是一夜变好。多用事实和时间戳，少用 \"weird\"、\"bad\" 这类形容词。"
+      },
+      {
+        en: "End with a clear ask for the incoming shift. \"Please keep an eye on checkout errors after the 10:00 flag rollout\" is better than a vague \"be careful.\" If nothing is urgent, say that too — silence with context builds trust. Offer a quick sync if the night was messy: \"Happy to jump on a five-minute call after standup.\" In English chats, these labels travel well: Open issues, Changes in last 24h, What I tried, Watch items. A good handoff turns night work into shared memory instead of private stress.",
+        zh: "结尾给接班人一个清晰请求。\"10:00 flag 发布后请盯一下结账错误\" 好过含糊的 \"小心点。\" 若没什么紧急的，也说清楚——带着上下文的安静更能建立信任。若夜里很乱，可提出快速同步：\"站会后我可以再打五分钟电话。\" 英文聊天里这几个小标题很好用：Open issues、Changes in last 24h、What I tried、Watch items。好的交接把夜班工作变成共享记忆，而不是私人压力。"
+      }
+    ],
+
+    core: {
+      words: [
+        { w: "on-call", phon: "/ˈɒn kɔːl/", pos: "n./adj.", def: "值班（随时响应线上问题）", def_en: "the duty of being ready to fix production issues", syn: ["pager duty", "on duty"], ex_en: "On-call handoff is a short map.", ex_zh: "值班交接是一份短地图。" },
+        { w: "handoff", phon: "/ˈhændɒf/", pos: "n.", def: "交接（把状态交给下一人）", def_en: "passing ownership and context to the next person", syn: ["handover", "shift transfer"], ex_en: "Leave an on-call handoff.", ex_zh: "留下一份值班交接。" },
+        { w: "near miss", phon: "/nɪə mɪs/", pos: "n.", def: "险些出事（差一点成事故）", def_en: "a problem that almost became an incident", syn: ["close call", "almost-incident"], ex_en: "Open incidents and near misses.", ex_zh: "未关闭事故和险些出事的情况。" },
+        { w: "runbook", phon: "/ˈrʌnbʊk/", pos: "n.", def: "操作手册（告警处理步骤）", def_en: "a step-by-step guide for handling an alert", syn: ["playbook", "ops guide"], ex_en: "Write runbook links beside the alerts.", ex_zh: "在告警旁写 runbook 链接。" },
+        { w: "rule out", phon: "/ruːl aʊt/", pos: "v. phr.", def: "排除（证明不是这个原因）", def_en: "to decide something is not the cause", syn: ["eliminate", "exclude"], ex_en: "Say what you ruled out.", ex_zh: "写明你排除了什么。" },
+        { w: "watch item", phon: "/wɒtʃ ˈaɪtəm/", pos: "n.", def: "需持续盯着的事项", def_en: "something the next person should keep monitoring", syn: ["monitor item", "keep an eye on"], ex_en: "End with watch items.", ex_zh: "结尾写需盯着的事项。" }
+      ],
+      grammar: [
+        { t: "If you only …, …", d: "只做某事的后果：If you only write \"quiet night,\" the next person starts from zero." },
+        { t: "will … if …", d: "条件触发动作：Will page if it stays above 800ms." }
+      ]
+    },
+
+    vocab: [
+      { w: "ping", phon: "/pɪŋ/", pos: "n.", def: "（告警/消息）叮一声提醒", def_en: "a small alert or notification that grabs attention", syn: ["alert", "nudge"], ex_en: "Not a diary of every ping.", ex_zh: "不是每条 ping 的日记。" },
+      { w: "alert", phon: "/əˈlɜːt/", pos: "n.", def: "告警", def_en: "a signal that something may be wrong in production", syn: ["page", "warning"], ex_en: "If the same alert fires again.", ex_zh: "若同一告警再响。" },
+      { w: "continuity", phon: "/ˌkɒntɪˈnjuːəti/", pos: "n.", def: "连续性（上下文不断档）", def_en: "keeping context so work does not restart from zero", syn: ["unbroken context", "smooth handoff"], ex_en: "Teams need continuity.", ex_zh: "团队需要连续性。" },
+      { w: "elevated", phon: "/ˈelɪveɪtɪd/", pos: "adj.", def: "偏高的（指标升高）", def_en: "higher than normal", syn: ["raised", "up"], ex_en: "Payment latency elevated since 02:10.", ex_zh: "支付延迟自 02:10 升高。" },
+      { w: "page", phon: "/peɪdʒ/", pos: "v.", def: "呼叫值班（打 pager）", def_en: "to wake or notify the on-call engineer", syn: ["alert on-call", "call the pager"], ex_en: "Will page if it stays high.", ex_zh: "持续偏高就 page。" },
+      { w: "side effect", phon: "/saɪd ɪˈfekt/", pos: "n.", def: "副作用", def_en: "an unwanted result that comes with a change", syn: ["knock-on effect", "secondary impact"], ex_en: "Delayed side effects.", ex_zh: "延迟的副作用。" },
+      { w: "dump", phon: "/dʌmp/", pos: "v.", def: "一股脑倒进去（信息过载）", def_en: "to put too much content in at once", syn: ["pour in", "flood with"], ex_en: "Do not dump the whole wiki.", ex_zh: "不要把整个 wiki 倒进去。" },
+      { w: "trail", phon: "/treɪl/", pos: "n.", def: "排查轨迹（留下的线索）", def_en: "a short record of steps already tried", syn: ["breadcrumb", "trace"], ex_en: "That short trail helps the next person.", ex_zh: "这条短轨迹帮到下一个人。" },
+      { w: "playbook", phon: "/ˈpleɪbʊk/", pos: "n.", def: "预案 / 标准处理流程", def_en: "a prepared set of steps for a known problem", syn: ["runbook", "standard procedure"], ex_en: "If a playbook is missing…", ex_zh: "若 playbook 缺失……" },
+      { w: "gap", phon: "/ɡæp/", pos: "n.", def: "缺口（缺失的步骤/文档）", def_en: "a missing piece in a process or document", syn: ["hole", "missing piece"], ex_en: "Note the gap so it can be fixed.", ex_zh: "记下缺口以便事后修补。" },
+      { w: "incoming shift", phon: "/ˈɪnkʌmɪŋ ʃɪft/", pos: "n.", def: "接班的一班", def_en: "the next group of people starting duty", syn: ["next shift", "incoming on-call"], ex_en: "A clear ask for the incoming shift.", ex_zh: "给接班人一个清晰请求。" },
+      { w: "keep an eye on", phon: "/kiːp ən aɪ ɒn/", pos: "v. phr.", def: "盯着 / 留意", def_en: "to watch something carefully for a while", syn: ["monitor", "watch"], ex_en: "Please keep an eye on checkout errors.", ex_zh: "请盯一下结账错误。" },
+      { w: "rollout", phon: "/ˈrəʊlaʊt/", pos: "n.", def: "灰度发布 / 逐步上线", def_en: "shipping a change in stages", syn: ["release", "gradual ship"], ex_en: "After the 10:00 flag rollout.", ex_zh: "在 10:00 flag 发布之后。" },
+      { w: "urgent", phon: "/ˈɜːdʒənt/", pos: "adj.", def: "紧急的", def_en: "needing action very soon", syn: ["pressing", "time-critical"], ex_en: "If nothing is urgent, say that too.", ex_zh: "若没什么紧急的，也说清楚。" },
+      { w: "shared memory", phon: "/ʃeəd ˈmeməri/", pos: "n.", def: "共享记忆（团队共同知情）", def_en: "knowledge the whole team can use later", syn: ["team knowledge", "common context"], ex_en: "Turns night work into shared memory.", ex_zh: "把夜班工作变成共享记忆。" },
+      { w: "private stress", phon: "/ˈpraɪvət stres/", pos: "n.", def: "私人压力（只有自己扛）", def_en: "worry that stays only with one person", syn: ["solo burden", "hidden pressure"], ex_en: "Instead of private stress.", ex_zh: "而不是私人压力。" },
+      { w: "from zero", phon: "/frəm ˈzɪərəʊ/", pos: "phr.", def: "从零开始", def_en: "with no useful context to start from", syn: ["from scratch", "with no context"], ex_en: "The next person starts from zero.", ex_zh: "下一个人从零开始。" }
+    ],
+
+    grammar: [
+      {
+        t: "If you only …, …",
+        pattern: "If you only write X, Y happens.",
+        rule: "强调「只做表面动作」会带来的后果，适合交接/文档类劝告。",
+        examples: [
+          { en: "If you only write \"quiet night,\" the next person starts from zero.", zh: "如果只写 quiet night，下一个人就从零开始。" }
+        ]
+      },
+      {
+        t: "will … if …",
+        pattern: "Will page if it stays above …",
+        rule: "值班里常用：先写触发条件，再写你会采取的动作。",
+        examples: [
+          { en: "Will page if it stays above 800ms for 10 minutes.", zh: "若持续 10 分钟高于 800ms 再 page。" }
+        ]
+      }
+    ],
+
+    quiz: [
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者认为好的值班交接最像什么？",
+        options: [
+          "把所有 ping 写成完整日记",
+          "给下一位工程师的短地图：风险、已查项、再响时怎么做",
+          "只写一句 quiet night",
+          "粘贴整个 wiki"
+        ],
+        answer: 1,
+        explain: "It is a short map: what is still risky, what you already checked, and what action to take if the alert fires again."
+      },
+      {
+        type: "fill",
+        tag: "语言点",
+        q: "Say what you tried and what you ____ out.",
+        answer: "ruled",
+        explain: "原文：what you ruled out（你排除了什么）。"
+      },
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "为什么交接里还要列最近 24 小时的发版/配置变更？",
+        options: [
+          "为了让文档更长",
+          "许多夜间告警是延迟副作用，不一定是随机问题",
+          "这样就不需要写 open incidents",
+          "发版信息对值班没有用"
+        ],
+        answer: 1,
+        explain: "Many night pages are delayed side effects, not random bad luck."
+      },
+      {
+        type: "choice",
+        tag: "语言点",
+        q: "文中 \"watch item\" 最接近的意思是？",
+        options: [
+          "手表商品",
+          "需要接班人持续盯着的事项",
+          "已经关闭的工单",
+          "代码仓库名称"
+        ],
+        answer: 1,
+        explain: "Watch items = 需持续盯着的事项。"
+      }
+    ]
   }
 
 ]

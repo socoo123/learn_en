@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-08-10T23:33:08.966Z",
+  "updatedAt": "2026-08-16T13:45:15.003Z",
   "lessons": {
     "2026-07-30": {
       "done": true,
@@ -61,14 +61,38 @@
       "updatedAt": "2026-08-10T23:33:08.966Z",
       "note": "这篇有点太简单，虽然一些生词不清楚，但是你可以提升点难度。",
       "done": true
+    },
+    "2026-08-12-reading": {
+      "difficulty": "hard",
+      "updatedAt": "2026-08-16T10:40:06.819Z",
+      "note": "这次的生词很多，读起来有点费劲。",
+      "done": true
+    },
+    "2026-08-14-reading": {
+      "difficulty": "ok",
+      "updatedAt": "2026-08-16T13:45:15.003Z",
+      "note": "难度合适，词汇虽然不知道的略多，但是总体可控，可以看到生词基本上都包含了",
+      "done": true
     }
   },
   "feedback": {
     "reading": {
       "easy": 2,
-      "ok": 2,
-      "hard": 2,
+      "ok": 3,
+      "hard": 3,
       "recent": [
+        {
+          "id": "2026-08-14-reading",
+          "difficulty": "ok",
+          "note": "难度合适，词汇虽然不知道的略多，但是总体可控，可以看到生词基本上都包含了",
+          "at": "2026-08-16T13:45:10.503Z"
+        },
+        {
+          "id": "2026-08-12-reading",
+          "difficulty": "hard",
+          "note": "这次的生词很多，读起来有点费劲。",
+          "at": "2026-08-16T10:40:00.584Z"
+        },
         {
           "id": "2026-08-11-reading",
           "difficulty": "easy",

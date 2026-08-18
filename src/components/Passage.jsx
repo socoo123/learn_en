@@ -1,28 +1,43 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { buildMarkIndex } from '../lib/word-marks.js'
 
-function escapeReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }
+function VocabTip({ tip }) {
+  if (!tip) return null
+  const { entry, x, y, below } = tip
+  return (
+    <div
+      className={'vw-tip' + (below ? ' below' : '')}
+      role="tooltip"
+      style={{ left: x, top: y }}
+    >
+      <div className="vw-tip-head">
+        <span className="vw-tip-w">{entry.w}</span>
+        {entry.pos && <span className="vw-tip-pos">{entry.pos}</span>}
+        {entry.phon && <span className="vw-tip-phon">{entry.phon}</span>}
+      </div>
+      {entry.def && <div className="vw-tip-def">{entry.def}</div>}
+      {entry.def_en && <div className="vw-tip-en">{entry.def_en}</div>}
+      {entry.syn?.length > 0 && (
+        <div className="vw-tip-syn">
+          <span>≈</span>
+          {entry.syn.join(' · ')}
+        </div>
+      )}
+    </div>
+  )
+}
 
-export default function Passage({ lesson, zhMode, passageFlash, onMarkClick }) {
-  const coreWords = (lesson.core && lesson.core.words) || []
+export default function Passage({ lesson, zhMode, passageFlash, onMarkClick, onVocabClick }) {
   const [flashing, setFlashing] = useState(null)
+  const [tip, setTip] = useState(null)
   const ref = useRef(null)
 
-  const phrases = useMemo(
-    () => [...new Set(coreWords.map(w => w.w).filter(Boolean))].sort((a, b) => b.length - a.length),
-    [coreWords]
+  const index = useMemo(
+    () => buildMarkIndex(lesson.core?.words, lesson.vocab),
+    [lesson],
   )
-  const regex = useMemo(
-    () => phrases.length ? new RegExp('\\b(' + phrases.map(escapeReg).join('|') + ')\\b', 'gi') : null,
-    [phrases]
-  )
-  const titleMap = useMemo(() => {
-    const m = {}
-    coreWords.forEach(w => { if (w.w) m[w.w.toLowerCase()] = w })
-    return m
-  }, [coreWords])
 
-  // 收到右侧传来的「在正文中闪烁」信号
   useEffect(() => {
     const word = passageFlash && passageFlash.word
     if (!word) return
@@ -37,7 +52,37 @@ export default function Passage({ lesson, zhMode, passageFlash, onMarkClick }) {
     }
   }, [passageFlash && passageFlash.n]) // eslint-disable-line
 
+  useEffect(() => {
+    if (!tip) return
+    const hide = () => setTip(null)
+    const reader = ref.current?.closest('.reader')
+    reader?.addEventListener('scroll', hide, { passive: true })
+    window.addEventListener('resize', hide)
+    return () => {
+      reader?.removeEventListener('scroll', hide)
+      window.removeEventListener('resize', hide)
+    }
+  }, [tip])
+
+  const showVocabTip = (el, entry) => {
+    const r = el.getBoundingClientRect()
+    const below = r.top < 150
+    const pad = 16
+    const half = 148
+    const x = Math.min(
+      window.innerWidth - half - pad,
+      Math.max(half + pad, r.left + r.width / 2),
+    )
+    setTip({
+      entry,
+      x,
+      y: below ? r.bottom + 8 : r.top - 8,
+      below,
+    })
+  }
+
   const renderEn = (text) => {
+    const regex = index.regex
     if (!regex) return text
     regex.lastIndex = 0
     const out = []
@@ -47,16 +92,31 @@ export default function Passage({ lesson, zhMode, passageFlash, onMarkClick }) {
       if (m.index > last) out.push(<span key={'t' + last}>{text.slice(last, m.index)}</span>)
       const w = m[0]
       const wl = w.toLowerCase()
-      const def = titleMap[wl]
-      out.push(
-        <mark
-          className={'hl' + (flashing === wl ? ' flash' : '')}
-          data-word={wl}
-          key={'m' + m.index}
-          title={def ? `${def.def || ''}${def.ex_zh ? ' ｜ ' + def.ex_zh : ''}` : ''}
-          onClick={() => onMarkClick(wl)}
-        >{w}</mark>
-      )
+      const info = index.lookup[wl]
+      if (info?.kind === 'vocab') {
+        const entry = info.entry
+        out.push(
+          <mark
+            className={'vw' + (flashing === info.canonical ? ' flash' : '')}
+            data-word={info.canonical}
+            key={'m' + m.index}
+            onMouseEnter={(e) => showVocabTip(e.currentTarget, entry)}
+            onMouseLeave={() => setTip(null)}
+            onClick={() => onVocabClick && onVocabClick(info.canonical)}
+          >{w}</mark>
+        )
+      } else {
+        const def = info?.entry
+        out.push(
+          <mark
+            className={'hl' + (flashing === (info?.canonical || wl) ? ' flash' : '')}
+            data-word={info?.canonical || wl}
+            key={'m' + m.index}
+            title={def ? `${def.def || ''}${def.ex_zh ? ' ｜ ' + def.ex_zh : ''}` : ''}
+            onClick={() => onMarkClick(info?.canonical || wl)}
+          >{w}</mark>
+        )
+      }
       last = m.index + w.length
     }
     if (last < text.length) out.push(<span key={'t' + last}>{text.slice(last)}</span>)
@@ -82,6 +142,7 @@ export default function Passage({ lesson, zhMode, passageFlash, onMarkClick }) {
           </AnimatePresence>
         </div>
       ))}
+      <VocabTip tip={tip} />
     </div>
   )
 }

@@ -1255,6 +1255,142 @@ export const LESSONS = [
         explain: "Watch items = 需持续盯着的事项。"
       }
     ]
+  },
+
+  {
+    id: "2026-08-18-reading",
+    date: "2026-08-18",
+    title: "Write a meeting follow-up people can act on",
+    source: "职场英语 · 会议跟进邮件",
+    tags: ["职场", "邮件", "会议"],
+    kind: "reading",
+    durationMin: 4,
+    stats: { words: 385, newWords: 16, minutes: 4 },
+
+    passage: [
+      {
+        en: "A meeting follow-up is not a transcript of every joke and slide. It is a short record for busy people: what we decided, who owns the next step, and by when. If you skip the note, people leave with different memories, and the next meeting starts by arguing about last week. Send it the same day, while the room is still fresh. Five clear lines beat a long recap that nobody opens.",
+        zh: "会议跟进不是把每个笑话和每页幻灯片都记下来。它是给忙碌的人看的短记录：我们决定了什么、下一步谁负责、什么时候前完成。若你不写这封邮件，大家带着不同记忆离开，下次开会先争论上周说了什么。趁记忆还热，当天发出去。五句清楚的话，胜过一封没人点开的长回顾。"
+      },
+      {
+        en: "Open with one sentence of context so a person who missed the call can still follow. Then use four labels that travel well in email: Decisions, Action items, Open questions, and Next meeting. Under Decisions, write facts, not soft wording. \"We will ship the checkout flag to 10% of EU traffic on Thursday\" is usable. \"We aligned on the rollout\" is not. Under Action items, put a name and a date on every line. An item with no owner is a wish, not a plan. If the list is long, mark the two items that block others so people do not treat every line as equal.",
+        zh: "先用一句话交代背景，没参会的人也能跟上。然后用四个在邮件里很好用的小标题：Decisions、Action items、Open questions、Next meeting。决定栏写事实，不写软话。\"周四把结账 flag 放到欧盟 10% 流量\" 能执行；\"我们就发布达成了一致\" 不行。行动项每一行都要有人名和日期。没有负责人的条目是愿望，不是计划。清单很长时，标出卡住别人的两项，避免大家把每行都当成同等重要。"
+      },
+      {
+        en: "Keep the tone warm but precise. You are confirming, not rewriting history. A useful opener is: \"Thanks for the discussion today. Here is what I captured — please reply if I missed a decision.\" If two people remember a point differently, do not argue in the thread. Write both versions as an Open question and ask for a choice by a date. That move protects the relationship and still forces a close.",
+        zh: "语气要暖，但用词要准。你是在确认，不是在改写历史。好用的开头：\"谢谢今天的讨论。以下是我记下的内容——若我漏了某个决定，请回复。\" 若两人对同一点记忆不同，不要在邮件串里争。把两种说法写成 Open question，并请在某日前选定。这一步既护关系，又能逼出收口。"
+      },
+      {
+        en: "In global teams, add time zones to every deadline and spell out short names once. \"Priya (payments) will send the test plan by Friday 17:00 CST\" saves a later ping. Copy only the people who must act or must know; a huge CC list makes everyone wait for someone else. If leadership was in the room, put the ask at the top: \"Need approval on Option B by Wednesday so engineering can start.\" Buried asks get a soft yes and no owner.",
+        zh: "跨国团队里，每个截止日期都写时区，简称第一次写全。\"Priya（支付）周五 17:00 CST 前发测试计划\" 能省掉后来一条追问。只抄送必须行动或必须知情的人；抄送名单太大，人人都在等别人。若领导在场，把请求放在最上面：\"周三前需要批准方案 B，以便工程开工。\" 埋起来的请求只会换来没有负责人的含糊同意。"
+      },
+      {
+        en: "Reuse these lines this week. 1) \"As discussed, we will…\" 2) \"Action: [name] by [date].\" 3) \"Please correct me if I missed anything.\" Save the template in your notes. After a few weeks, the follow-up should take ten minutes, not half an hour. That habit is how meeting time turns into shipped work.",
+        zh: "这周复用这三句。1）\"按讨论，我们将……\" 2）\"Action：[人名] by [日期]。\" 3）\"若我漏了什么，请指正。\" 把模板存进笔记。几周后，跟进邮件应只需十分钟，而不是半小时。这个习惯能把开会时间变成真正交付的工作。"
+      }
+    ],
+
+    core: {
+      words: [
+        { w: "follow-up", phon: "/ˈfɒləʊ ʌp/", pos: "n.", def: "跟进（会后确认邮件）", def_en: "a short note sent after a meeting to confirm next steps", syn: ["recap email", "meeting note"], ex_en: "A meeting follow-up is a short record.", ex_zh: "会议跟进是一份短记录。" },
+        { w: "action item", phon: "/ˈækʃn ˈaɪtəm/", pos: "n.", def: "行动项（谁在何时做什么）", def_en: "a task with an owner and a due date", syn: ["todo", "next step"], ex_en: "Put a name on every action item.", ex_zh: "每个行动项都写上人名。" },
+        { w: "open question", phon: "/ˈəʊpən ˈkwestʃən/", pos: "n.", def: "未决问题", def_en: "a point that still needs a decision", syn: ["unresolved item", "pending question"], ex_en: "Write both versions as an open question.", ex_zh: "把两种说法写成未决问题。" },
+        { w: "owner", phon: "/ˈəʊnə/", pos: "n.", def: "负责人", def_en: "the person accountable for a task", syn: ["assignee", "DRI"], ex_en: "An item with no owner is a wish.", ex_zh: "没有负责人的条目是愿望。" },
+        { w: "soft yes", phon: "/sɒft jes/", pos: "n.", def: "含糊同意（没有落实）", def_en: "a weak yes with no clear owner or date", syn: ["vague yes", "unclear buy-in"], ex_en: "Buried asks get a soft yes.", ex_zh: "埋起来的请求换来含糊同意。" },
+        { w: "as discussed", phon: "/æz dɪˈskʌst/", pos: "phr.", def: "按讨论 / 如前所述", def_en: "referring back to what the group already agreed", syn: ["as we agreed", "per our talk"], ex_en: "As discussed, we will ship on Thursday.", ex_zh: "按讨论，我们将周四发布。" }
+      ],
+      grammar: [
+        { t: "so + 目的/结果", d: "Need approval by Wednesday so engineering can start." },
+        { t: "If you skip …, …", d: "不做某事的后果：If you skip the note, people leave with different memories." }
+      ]
+    },
+
+    vocab: [
+      { w: "transcript", phon: "/ˈtrænskrɪpt/", pos: "n.", def: "逐字稿 / 完整记录", def_en: "a full word-for-word record of what was said", syn: ["full record", "verbatim notes"], ex_en: "Not a transcript of every joke.", ex_zh: "不是每个笑话的逐字稿。" },
+      { w: "recap", phon: "/ˈriːkæp/", pos: "n.", def: "回顾摘要", def_en: "a short summary of what happened", syn: ["summary", "rundown"], ex_en: "A long recap that nobody opens.", ex_zh: "没人点开的长回顾。" },
+      { w: "aligned", phon: "/əˈlaɪnd/", pos: "adj.", def: "达成一致的（常偏空）", def_en: "in agreement, sometimes without a clear plan", syn: ["in agreement", "on the same page"], ex_en: "We aligned on the rollout.", ex_zh: "我们就发布达成了一致。" },
+      { w: "block", phon: "/blɒk/", pos: "v.", def: "阻塞（卡住别人）", def_en: "to stop other work from moving forward", syn: ["hold up", "stall"], ex_en: "Mark the two items that block others.", ex_zh: "标出卡住别人的两项。" },
+      { w: "precise", phon: "/prɪˈsaɪs/", pos: "adj.", def: "精确的 / 不含糊的", def_en: "clear and exact, not vague", syn: ["exact", "specific"], ex_en: "Warm but precise.", ex_zh: "暖但精确。" },
+      { w: "confirm", phon: "/kənˈfɜːm/", pos: "v.", def: "确认", def_en: "to state again so everyone has the same record", syn: ["verify", "restate"], ex_en: "You are confirming, not rewriting history.", ex_zh: "你是在确认，不是改写历史。" },
+      { w: "capture", phon: "/ˈkæptʃə/", pos: "v.", def: "记下 / 捕捉要点", def_en: "to write down the key points you heard", syn: ["note down", "record"], ex_en: "Here is what I captured.", ex_zh: "以下是我记下的内容。" },
+      { w: "thread", phon: "/θred/", pos: "n.", def: "邮件串 / 讨论串", def_en: "a chain of replies on the same topic", syn: ["email chain", "reply chain"], ex_en: "Do not argue in the thread.", ex_zh: "不要在邮件串里争。" },
+      { w: "close", phon: "/kləʊz/", pos: "n.", def: "收口（把问题了结）", def_en: "a clear finish that ends the open point", syn: ["closure", "resolution"], ex_en: "Still forces a close.", ex_zh: "仍能逼出收口。" },
+      { w: "spell out", phon: "/spel aʊt/", pos: "v. phr.", def: "写全 / 说清楚", def_en: "to write the full name or meaning", syn: ["write in full", "explain clearly"], ex_en: "Spell out short names once.", ex_zh: "简称第一次写全。" },
+      { w: "CC", phon: "/ˌsiː ˈsiː/", pos: "n./v.", def: "抄送", def_en: "to add extra people who should see the email", syn: ["copy", "copy in"], ex_en: "A huge CC list.", ex_zh: "巨大的抄送名单。" },
+      { w: "ask", phon: "/ɑːsk/", pos: "n.", def: "请求（明确要什么）", def_en: "a direct request for a decision or action", syn: ["request", "ask for approval"], ex_en: "Put the ask at the top.", ex_zh: "把请求放在最上面。" },
+      { w: "buried", phon: "/ˈberid/", pos: "adj.", def: "被埋住的（藏在文末）", def_en: "hidden so far down that people miss it", syn: ["hidden", "easy to miss"], ex_en: "Buried asks get a soft yes.", ex_zh: "埋起来的请求换来含糊同意。" },
+      { w: "deadline", phon: "/ˈdedlaɪn/", pos: "n.", def: "截止日期", def_en: "the time when work must be finished", syn: ["due date", "cutoff"], ex_en: "Add time zones to every deadline.", ex_zh: "每个截止日期都写时区。" },
+      { w: "correct me", phon: "/kəˈrekt miː/", pos: "v. phr.", def: "请指正（欢迎纠正）", def_en: "please tell me if I got something wrong", syn: ["please fix this", "flag mistakes"], ex_en: "Please correct me if I missed anything.", ex_zh: "若我漏了什么，请指正。" },
+      { w: "shipped work", phon: "/ʃɪpt wɜːk/", pos: "n.", def: "真正交付出去的工作", def_en: "work that is finished and released, not only discussed", syn: ["delivered work", "real output"], ex_en: "Meeting time turns into shipped work.", ex_zh: "开会时间变成真正交付的工作。" }
+    ],
+
+    grammar: [
+      {
+        t: "so + 目的",
+        pattern: "Need … by … so we can …",
+        rule: "提请求时用 so 接目的，让对方知道为什么赶这个时间点。",
+        examples: [
+          { en: "Need approval on Option B by Wednesday so engineering can start.", zh: "周三前需要批准方案 B，以便工程开工。" }
+        ]
+      },
+      {
+        t: "If you skip …, …",
+        pattern: "If you skip the note, Y happens.",
+        rule: "说明不做跟进的后果，适合劝人养成会后邮件习惯。",
+        examples: [
+          { en: "If you skip the note, people leave with different memories.", zh: "若不写跟进，大家带着不同记忆离开。" }
+        ]
+      }
+    ],
+
+    quiz: [
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "作者认为会议跟进邮件最该记下什么？",
+        options: [
+          "每个笑话和每页幻灯片",
+          "决定、负责人、截止日期",
+          "只写 \"we aligned\"",
+          "把所有同事都抄送进去"
+        ],
+        answer: 1,
+        explain: "What we decided, who owns the next step, and by when."
+      },
+      {
+        type: "fill",
+        tag: "语言点",
+        q: "An item with no ____ is a wish, not a plan.",
+        answer: "owner",
+        explain: "原文：An item with no owner is a wish, not a plan."
+      },
+      {
+        type: "choice",
+        tag: "阅读理解",
+        q: "两人对会上说法记忆不同时，作者建议怎么做？",
+        options: [
+          "在邮件串里争论对错",
+          "写成 Open question，并请在某日前选定",
+          "删掉这条，假装没发生",
+          "只听职位最高的人"
+        ],
+        answer: 1,
+        explain: "Write both versions as an Open question and ask for a choice by a date."
+      },
+      {
+        type: "choice",
+        tag: "语言点",
+        q: "文中 \"as discussed\" 最接近的用法是？",
+        options: [
+          "开始一场新争论",
+          "回指会上已达成的内容",
+          "取消行动项",
+          "要求立刻开会"
+        ],
+        answer: 1,
+        explain: "As discussed = 按讨论 / 回指已经说过的决定。"
+      }
+    ]
   }
 
 ]

@@ -1,16 +1,11 @@
+import { buildMarkIndex } from '../lib/word-marks.js'
+
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F']
 const ansText = q => (Array.isArray(q.answer) ? q.answer[0] : q.answer)
 
-function escapeReg(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') }
-
-// 与网页 Passage.jsx 相同的核心词高亮逻辑（静态版，无闪烁/点击）
-function buildHighlighter(coreWords) {
-  const phrases = [...new Set((coreWords || []).map(w => w.w).filter(Boolean))].sort((a, b) => b.length - a.length)
-  if (!phrases.length) return null
-  return new RegExp('\\b(' + phrases.map(escapeReg).join('|') + ')\\b', 'gi')
-}
-
-function renderEn(text, regex) {
+// 与网页 Passage.jsx 相同的核心词 / 生词标注（静态版，无闪烁/点击）
+function renderEn(text, index) {
+  const regex = index?.regex
   if (!regex) return text
   regex.lastIndex = 0
   const out = []
@@ -18,7 +13,9 @@ function renderEn(text, regex) {
   let m
   while ((m = regex.exec(text)) !== null) {
     if (m.index > last) out.push(<span key={'t' + last}>{text.slice(last, m.index)}</span>)
-    out.push(<mark className="ex-hl" key={'m' + m.index}>{m[0]}</mark>)
+    const info = index.lookup[m[0].toLowerCase()]
+    const cls = info?.kind === 'vocab' ? 'ex-vw-mark' : 'ex-hl'
+    out.push(<mark className={cls} key={'m' + m.index}>{m[0]}</mark>)
     last = m.index + m[0].length
   }
   if (last < text.length) out.push(<span key={'t' + last}>{text.slice(last)}</span>)
@@ -81,7 +78,7 @@ function ExportAnnotations({ core }) {
 export default function ExportView({ lesson }) {
   if (!lesson) return null
   const core = lesson.core || {}
-  const hlRegex = buildHighlighter(core.words)
+  const markIndex = buildMarkIndex(core.words, lesson.vocab)
 
   return (
     <div className="ex-root">
@@ -104,7 +101,7 @@ export default function ExportView({ lesson }) {
             <div className="ex-passage">
               {lesson.passage.map((p, i) => (
                 <div className="ex-para" key={i}>
-                  <div className="ex-en">{renderEn(p.en, hlRegex)}</div>
+                  <div className="ex-en">{renderEn(p.en, markIndex)}</div>
                   <div className="ex-zh">{p.zh}</div>
                 </div>
               ))}

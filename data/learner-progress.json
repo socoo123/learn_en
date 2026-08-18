@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updatedAt": "2026-08-16T13:45:15.003Z",
+  "updatedAt": "2026-08-18T00:28:07.179Z",
   "lessons": {
     "2026-07-30": {
       "done": true,
@@ -73,14 +73,34 @@
       "updatedAt": "2026-08-16T13:45:15.003Z",
       "note": "难度合适，词汇虽然不知道的略多，但是总体可控，可以看到生词基本上都包含了",
       "done": true
+    },
+    "2026-08-17-reading": {
+      "done": true,
+      "updatedAt": "2026-08-17T14:14:00.451Z"
+    },
+    "2026-08-06-cook-05": {
+      "done": true,
+      "updatedAt": "2026-08-17T14:14:04.914Z"
+    },
+    "2026-08-18-reading": {
+      "difficulty": "ok",
+      "updatedAt": "2026-08-18T00:28:07.179Z",
+      "note": "非常好读，很有用，请继续推荐类似的",
+      "done": true
     }
   },
   "feedback": {
     "reading": {
       "easy": 2,
-      "ok": 3,
+      "ok": 4,
       "hard": 3,
       "recent": [
+        {
+          "id": "2026-08-18-reading",
+          "difficulty": "ok",
+          "note": "非常好读，很有用，请继续推荐类似的",
+          "at": "2026-08-18T00:28:02.017Z"
+        },
         {
           "id": "2026-08-14-reading",
           "difficulty": "ok",

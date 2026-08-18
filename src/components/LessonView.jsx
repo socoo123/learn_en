@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Passage from './Passage.jsx'
 import VocabTable from './VocabTable.jsx'
 import Grammar from './Grammar.jsx'
@@ -12,6 +13,7 @@ export default function LessonView({
   hasPrev, hasNext, onPrev, onNext,
 }) {
   const { isDone, setDone } = useProgress()
+  const [vocabFlash, setVocabFlash] = useState({ word: null, n: 0 })
 
   if (!lesson) {
     return (
@@ -84,11 +86,26 @@ export default function LessonView({
           )}
         </div>
 
+        {(lesson.core?.words?.length > 0 || lesson.vocab?.length > 0) && (
+          <p className="mark-legend">
+            {lesson.core?.words?.length > 0 && (
+              <span><mark className="hl">核心词</mark> 点击对照右侧</span>
+            )}
+            {lesson.core?.words?.length > 0 && lesson.vocab?.length > 0 && (
+              <span className="mark-legend-dot">·</span>
+            )}
+            {lesson.vocab?.length > 0 && (
+              <span><mark className="vw">生词</mark> 悬停看释义，点击跳到词表</span>
+            )}
+          </p>
+        )}
+
         <Passage
           lesson={lesson}
           zhMode={zhMode}
           passageFlash={passageFlash}
           onMarkClick={(w) => setCardFlash({ word: w, n: (cardFlash.n || 0) + 1 })}
+          onVocabClick={(w) => setVocabFlash({ word: w, n: (vocabFlash.n || 0) + 1 })}
         />
 
         {lesson.vocab && lesson.vocab.length > 0 && (
@@ -98,7 +115,7 @@ export default function LessonView({
               <span className="sec-en">VOCABULARY</span>
             </div>
             <hr className="sec-rule" />
-            <VocabTable vocab={lesson.vocab} />
+            <VocabTable vocab={lesson.vocab} vocabFlash={vocabFlash} />
           </section>
         )}
 

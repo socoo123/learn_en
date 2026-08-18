@@ -1,14 +1,36 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-export default function VocabTable({ vocab }) {
+export default function VocabTable({ vocab, vocabFlash }) {
   const [open, setOpen] = useState(() => new Set())
-  if (!vocab || !vocab.length) return null
+  const [flashing, setFlashing] = useState(null)
+  const wrapRef = useRef(null)
+
+  useEffect(() => {
+    const word = vocabFlash && vocabFlash.word
+    if (!word) return
+    const row = wrapRef.current?.querySelector('[data-vocab="' + word.replace(/"/g, '') + '"]')
+    if (!row) return
+    const idx = Number(row.getAttribute('data-idx'))
+    if (vocab?.[idx]?.ex_en) {
+      setOpen((prev) => {
+        const next = new Set(prev)
+        next.add(idx)
+        return next
+      })
+    }
+    row.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    setFlashing(word)
+    const t = setTimeout(() => setFlashing(null), 950)
+    return () => clearTimeout(t)
+  }, [vocabFlash && vocabFlash.n]) // eslint-disable-line
 
   const withEx = useMemo(
-    () => vocab.map((v, i) => (v.ex_en ? i : -1)).filter((i) => i >= 0),
+    () => (vocab || []).map((v, i) => (v.ex_en ? i : -1)).filter((i) => i >= 0),
     [vocab],
   )
+
+  if (!vocab || !vocab.length) return null
   const allOpen = withEx.length > 0 && withEx.every((i) => open.has(i))
 
   const toggle = (i) => {
@@ -23,7 +45,7 @@ export default function VocabTable({ vocab }) {
   }
 
   return (
-    <div className="vocab-wrap">
+    <div className="vocab-wrap" ref={wrapRef}>
       {withEx.length > 0 && (
         <div className="vocab-toolbar">
           <button type="button" className={'btn' + (allOpen ? ' on' : '')} onClick={toggleAll}>
@@ -39,7 +61,12 @@ export default function VocabTable({ vocab }) {
         {vocab.map((v, i) => {
           const expanded = open.has(i)
           return (
-            <div key={i} className={'vocab-row' + (expanded ? ' expanded' : '')}>
+            <div
+              key={i}
+              data-idx={i}
+              data-vocab={(v.w || '').toLowerCase()}
+              className={'vocab-row' + (expanded ? ' expanded' : '') + (flashing === (v.w || '').toLowerCase() ? ' flash' : '')}
+            >
               <div className="v-word">
                 <span className="w">{v.w}</span>
                 {v.phon && <span className="phon">{v.phon}</span>}
